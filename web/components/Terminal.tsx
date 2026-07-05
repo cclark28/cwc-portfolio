@@ -13,7 +13,7 @@ const COMMANDS = [
   { label: 'photo', col: 0 },
   { label: 'info', col: 1 },
   { label: 'playground', col: 1, disabled: true },
-  { label: 'esc', col: 2 },
+  { label: 'esc', col: 2, suffix: '- back' },
   { label: 'help', col: 2 },
 ] as const;
 
@@ -66,7 +66,7 @@ export default function Terminal({ activeFilter, onCommand }: TerminalProps) {
     >
       {/* Input row */}
       <form onSubmit={handleSubmit} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
-        <span style={{ color: '#86858C', fontSize: '0.75rem', flexShrink: 0 }}>&#9654;</span>
+        <span style={{ color: '#86858C', fontSize: '0.875rem', flexShrink: 0 }}>&#9654;</span>
         {!focused && !input && (
           <div
             style={{
@@ -84,7 +84,7 @@ export default function Terminal({ activeFilter, onCommand }: TerminalProps) {
           onChange={(e) => setInput(e.target.value)}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
-          placeholder={focused ? '' : ''}
+          placeholder="type a command — work, photo, info…"
           style={{
             flex: 1,
             background: 'transparent',
@@ -97,10 +97,13 @@ export default function Terminal({ activeFilter, onCommand }: TerminalProps) {
         />
       </form>
 
+      {/* Dashed separator */}
+      <div style={{ borderTop: '1px dashed #D4D3D8', marginBottom: 14 }} />
+
       {/* Labels row */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
         <span style={{ font: "500 0.625rem var(--font-mono)", textTransform: 'uppercase', color: '#9B9AA0', letterSpacing: '0.06em' }}>
-          Available commands
+          Available commands:
         </span>
         <span style={{ font: "400 0.625rem var(--font-mono)", color: '#9B9AA0' }}>
           scroll to zoom
@@ -121,7 +124,14 @@ export default function Terminal({ activeFilter, onCommand }: TerminalProps) {
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           {col2.map((c) => (
-            <Chip key={c.label} label={c.label} onClick={() => handleChipClick(c.label)} />
+            <div key={c.label} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <Chip label={c.label} onClick={() => handleChipClick(c.label)} />
+              {'suffix' in c && c.suffix && (
+                <span style={{ font: "400 0.6875rem var(--font-mono)", color: '#9B9AA0', whiteSpace: 'nowrap' }}>
+                  {c.suffix}
+                </span>
+              )}
+            </div>
           ))}
         </div>
       </div>
@@ -158,7 +168,9 @@ function Chip({
         cursor: disabled ? 'not-allowed' : 'pointer',
         background: active ? '#18181B' : disabled ? '#F0EFF1' : hovered ? '#E1E0E4' : '#ECEBEE',
         color: active ? '#FFFFFF' : disabled ? '#9B9AA0' : '#18181B',
-        transition: 'background 0.12s ease, color 0.12s ease',
+        transitionProperty: 'background, color',
+        transitionDuration: '0.12s, 0.12s',
+        transitionTimingFunction: 'ease, ease',
         textAlign: 'left',
       }}
     >

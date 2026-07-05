@@ -9,7 +9,7 @@ const SAMPLE_WORK: RawCanvasItem[] = [
   { id: 'asian-art', slug: 'asian-art', title: 'Asian Art Museum San Francisco', year: 2013, private: false, category: 'work' },
   { id: 'delivra', slug: 'delivra', title: 'Delivra', year: 2022, private: false, category: 'work' },
   { id: 'ronin', slug: 'ronin', title: 'Rónin Tactics', year: 2020, private: false, category: 'work' },
-  { id: 'jlo', slug: 'jlo', title: 'JLO', year: 2018, private: true, category: 'work' },
+  { id: 'jlo', slug: 'jlo', title: 'JLO', year: 2018, private: false, category: 'work' },
   { id: 'blend', slug: 'blend', title: 'Blend Creative Team', year: 2017, private: false, category: 'work' },
   { id: 'pokedex', slug: 'pokedex', title: 'Pokédex 3D Pro', year: 2013, private: false, category: 'work' },
   { id: 'pokemon-bw2', slug: 'pokemon-bw2', title: 'Pokémon Black & White v2', year: 2012, private: false, category: 'work' },
