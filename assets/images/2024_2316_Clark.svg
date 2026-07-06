@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 102.67 31.25">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: NHaasGroteskDSPro-95Blk, 'Neue Haas Grotesk Display Pro';
+        font-size: 42px;
+      }
+
+      .cls-2 {
+        letter-spacing: 0em;
+      }
+
+      .cls-3 {
+        letter-spacing: -.04em;
+      }
+    </style>
+  </defs>
+  <text class="cls-1" transform="translate(-.31 30.58)"><tspan x="0" y="0">cl</tspan><tspan class="cls-3" x="34.48" y="0">a</tspan><tspan class="cls-2" x="56.49" y="0">®k</tspan></text>
+</svg>

@@ -28,3 +28,9 @@
 
 # Dotenv and similar local-only files
 *.local
+
+# Large media files (images served from Sanity CDN)
+*.mp4
+*.mp4.gif
+*.mov
+assets/images/*.gif
