@@ -52,13 +52,30 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'Person',
               name: 'Charles W. Clark',
-              jobTitle: 'Senior Designer',
+              alternateName: 'Charlie Clark',
+              jobTitle: 'Senior Designer & Art Director',
+              description: 'Multidisciplinary designer and art director with 20+ years of experience spanning print, web, interactive, entertainment, B2B SaaS, and experimental AI. Currently at DemandScience implementing AI into design workflows.',
               worksFor: { '@type': 'Organization', name: 'DemandScience' },
               url: 'https://www.charleswclark.com',
+              email: 'charlieclark@gmail.com',
               sameAs: ['https://www.linkedin.com/in/charleswclarkii/'],
+              knowsAbout: [
+                'Graphic Design', 'Art Direction', 'Brand Identity',
+                'Digital Product Design', 'B2B SaaS Design', 'Print Production',
+                'AI Implementation', 'Interactive Design', 'Concert Photography',
+                'Entertainment Design', 'Gaming Creative', 'Web Design',
+                'UX Design', 'Production Management'
+              ],
+              hasOccupation: {
+                '@type': 'Occupation',
+                name: 'Multidisciplinary Designer & Art Director',
+                occupationalCategory: '27-1024.00',
+                skills: 'Brand Design, Digital Design, Print Production, AI Integration, Art Direction, Photography'
+              },
             }),
           }}
         />
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable site description" />
         {children}
       </body>
     </html>
