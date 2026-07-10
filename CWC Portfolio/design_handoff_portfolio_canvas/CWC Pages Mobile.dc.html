@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family:'NHG'; src:url('fonts/NHG-Regular.otf') format('opentype'); font-weight:400; font-style:normal; }
+  @font-face { font-family:'NHG'; src:url('fonts/NHG-Medium.otf') format('opentype'); font-weight:500; font-style:normal; }
+  @font-face { font-family:'NHG'; src:url('fonts/NHG-Bold.otf') format('opentype'); font-weight:700; font-style:normal; }
+  * { box-sizing: border-box; }
+  ::selection { background: #18181B; color: #FFFFFF; }
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div style="font-family:'NHG',sans-serif; max-width:420px; margin:0 auto; min-height:100vh; background:#FAFAFB; position:relative;">
+
+  <div style="position:sticky; top:0; z-index:6; display:flex; align-items:center; justify-content:space-between; padding:16px 20px; background:#FAFAFB; border-bottom:1px solid #E5E4E6;">
+    <img src="assets/clark-logo.svg" alt="Clark" style="height:18px;">
+    <button onClick="{{ openMenu }}" style="width:36px; height:36px; border:1px solid #E5E4E6; border-radius:4px; background:#FFFFFF; display:flex; align-items:center; justify-content:center;" aria-label="Menu">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#18181B" stroke-width="1.8"><line x1="4" y1="7" x2="20" y2="7"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="17" x2="20" y2="17"></line></svg>
+    </button>
+  </div>
+
+  <div style="margin:16px 20px; padding:14px 16px; background:#ECEBEE; border-radius:4px; font:400 0.8125rem/1.6 'NHG',sans-serif; color:#58565D;">This site is built for an experience-driven design — for the full, more enjoyable experience, visit on desktop.</div>
+
+  <div style="padding:8px 20px 4px; font:500 0.75rem 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.04em; color:#86858C;">Work</div>
+  <sc-for list="{{ workByYear }}" as="g" hint-placeholder-count="6">
+    <div style="margin:0 20px 20px; border:1px solid #E5E4E6; border-radius:6px; overflow:hidden; background:#FFFFFF;">
+      <div style="padding:10px 16px; background:#FAFAFB; font:500 0.75rem 'IBM Plex Mono',monospace; color:#18181B; border-bottom:1px solid #E5E4E6;">{{ g.year }}</div>
+      <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="3">
+        <div onClick="{{ it.onOpen }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; border-top:1px solid #F1F0EC; cursor:pointer;">
+          <span style="font:500 0.9375rem 'NHG',sans-serif;">{{ it.title }}</span>
+          <sc-if value="{{ it.private }}">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#86858C" stroke-width="1.6" style="flex:none;"><rect x="5" y="11" width="14" height="9" rx="1"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </sc-for>
+
+  <div style="padding:8px 20px 4px; font:500 0.75rem 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.04em; color:#86858C;">Photography</div>
+  <sc-for list="{{ photoByYear }}" as="g" hint-placeholder-count="6">
+    <div style="margin:0 20px 20px; border:1px solid #E5E4E6; border-radius:6px; overflow:hidden; background:#FFFFFF;">
+      <div style="padding:10px 16px; background:#FAFAFB; font:500 0.75rem 'IBM Plex Mono',monospace; color:#18181B; border-bottom:1px solid #E5E4E6;">{{ g.year }}</div>
+      <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="3">
+        <div onClick="{{ it.onOpen }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; border-top:1px solid #F1F0EC; cursor:pointer;">
+          <span style="font:500 0.9375rem 'NHG',sans-serif;">{{ it.title }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </sc-for>
+
+  <div style="height:24px;"></div>
+
+  <sc-if value="{{ menuOpen }}">
+    <div style="position:fixed; top:0; bottom:0; left:50%; transform:translateX(-50%); width:min(420px,100vw); z-index:30; background:rgba(24,24,27,0.35); overflow:hidden;" onClick="{{ closeMenu }}">
+      <div style="position:absolute; top:0; right:0; bottom:0; width:78%; max-width:320px; background:#FAFAFB; border-left:1px solid #E5E4E6; padding:24px 20px; display:flex; flex-direction:column; gap:16px;">
+        <div style="display:flex; justify-content:flex-end;"><button onClick="{{ closeMenu }}" style="border:none; background:transparent; padding:0; cursor:pointer;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#58565D" stroke-width="1.8"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></button></div>
+        <span onClick="{{ closeMenu }}" style="font:500 0.9375rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:4px; padding:14px 16px;">work</span>
+        <span onClick="{{ closeMenu }}" style="font:500 0.9375rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:4px; padding:14px 16px;">photo</span>
+        <span onClick="{{ goInfo }}" style="font:500 0.9375rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:4px; padding:14px 16px;">info</span>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ PROJECT DETAIL OVERLAY ============ -->
+  <sc-if value="{{ showDetail }}">
+    <div style="position:fixed; top:0; bottom:0; left:50%; transform:translateX(-50%); width:min(420px,100vw); background:rgba(24,24,27,0.35); z-index:20; display:flex; align-items:flex-end; overflow:hidden;" onClick="{{ closeOverlay }}">
+      <div style="width:100%; max-height:90vh; background:#FFFFFF; border-radius:12px 12px 0 0; overflow-y:auto;" onClick="{{ stopProp }}">
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid #E5E4E6; position:sticky; top:0; background:#FFFFFF;">
+          <span style="font:500 0.75rem 'IBM Plex Mono',monospace; letter-spacing:0.03em; text-transform:uppercase;">{{ activeProject.title }}</span>
+          <button onClick="{{ closeOverlay }}" style="width:28px; height:28px; border:none; background:transparent; padding:0; cursor:pointer; color:#58565D;" aria-label="Close">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg>
+          </button>
+        </div>
+        <div style="padding:24px 20px;">
+          <h1 style="margin:0 0 16px; font:700 1.5rem/1.15 'NHG',sans-serif; letter-spacing:-0.02em;">{{ activeProject.title }}</h1>
+          <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:20px; font:400 0.8125rem 'IBM Plex Mono',monospace; color:#86858C;">
+            <div><span style="color:#18181B;">Year</span> — {{ activeProject.year }}</div>
+            <div><span style="color:#18181B;">Type</span> — {{ activeProject.tags }}</div>
+            <div><span style="color:#18181B;">Client</span> — {{ activeProject.client }}</div>
+          </div>
+          <p style="margin:0 0 20px; font:400 0.9375rem/1.7 'NHG',sans-serif; color:#3A3830;">{{ activeProject.desc }}</p>
+          <image-slot id="{{ activeProject.id }}-m1" style="width:100%; aspect-ratio:16/9; margin-bottom:12px;" shape="rect" placeholder="1920 × 1080"></image-slot>
+          <image-slot id="{{ activeProject.id }}-m2" style="width:100%; aspect-ratio:16/9;" shape="rect" placeholder="1920 × 1080"></image-slot>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ INFO OVERLAY ============ -->
+  <sc-if value="{{ showInfo }}">
+    <div style="position:fixed; top:0; bottom:0; left:50%; transform:translateX(-50%); width:min(420px,100vw); background:#FFFFFF; z-index:20; overflow-y:auto;">
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:16px 20px; border-bottom:1px solid #E5E4E6;">
+        <span style="font:500 0.75rem 'IBM Plex Mono',monospace; letter-spacing:0.03em; text-transform:uppercase;">Info</span>
+        <button onClick="{{ closeOverlay }}" style="width:28px; height:28px; border:none; background:transparent; padding:0; cursor:pointer; color:#58565D;" aria-label="Close">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg>
+        </button>
+      </div>
+      <div style="padding:32px 20px;">
+        <h1 style="margin:0 0 24px; font:700 3rem/0.95 'NHG',sans-serif; letter-spacing:-0.02em;">Aloha,<br>I'm Charlie.</h1>
+        <image-slot id="info-avatar-m" style="width:100px; height:100px; margin-bottom:20px;" shape="rect" radius="4" placeholder="Charlie"></image-slot>
+        <p style="margin:0 0 24px; font:400 1.0625rem/1.6 'NHG',sans-serif; color:#3A3830;">I'm a multidisciplinary designer exploring the intersection of technology, storytelling, and design. I collaborate on useful, experimental, and immersive experiences across digital, environmental, and physical touchpoints.</p>
+        <div style="font:500 0.6875rem 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.04em; color:#86858C; margin-bottom:8px;">Current</div>
+        <div style="font:700 1.125rem 'NHG',sans-serif; margin-bottom:4px;">Senior Designer</div>
+        <div style="font:400 0.8125rem 'IBM Plex Mono',monospace; color:#86858C; margin-bottom:16px;">DemandScience / Terminus</div>
+        <div style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C; margin-bottom:20px;">Based in the United States</div>
+        <a href="mailto:charlieclark@gmail.com" style="color:#4D80E6; text-decoration:none; border-bottom:1px solid rgba(77,128,230,0.35); font:500 0.9375rem 'NHG',sans-serif;">Say hello →</a>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { menuOpen: false, view: 'list', activeId: null, dataReady: false };
+
+  componentDidMount() {
+    import('./cwc-projects-data.js').then((mod) => {
+      this.PROJECTS = mod.PROJECTS;
+      this.workByYear = mod.groupByYear(mod.WORK);
+      this.photoByYear = mod.groupByYear(mod.PHOTO);
+      this.setState({ dataReady: true });
+    });
+  }
+
+  openProject(p) { this.setState({ view: 'detail', activeId: p.id, menuOpen: false }); }
+  stopProp(e) { e.stopPropagation(); }
+
+  renderVals() {
+    const s = this.state;
+    const active = this.PROJECTS ? (this.PROJECTS.find(p => p.id === s.activeId) || null) : null;
+    const mapGroup = (groups) => (groups || []).map(g => ({
+      year: g.year,
+      items: g.items.map(p => ({ id: p.id, title: p.title, private: p.private, onOpen: () => this.openProject(p) }))
+    }));
+    return {
+      workByYear: mapGroup(this.workByYear),
+      photoByYear: mapGroup(this.photoByYear),
+      menuOpen: s.menuOpen,
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      goInfo: () => this.setState({ menuOpen: false, view: 'info' }),
+      showDetail: s.view === 'detail' && !!active,
+      showInfo: s.view === 'info',
+      closeOverlay: () => this.setState({ view: 'list', activeId: null }),
+      stopProp: (e) => this.stopProp(e),
+      activeProject: active || { title: '', year: '', tags: '', client: '', desc: '', id: '' }
+    };
+  }
+}
+
+</script>
+</body>
+</html>

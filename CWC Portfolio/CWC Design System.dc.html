@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  @font-face { font-family:'NHG'; src:url('fonts/NHG-Regular.otf') format('opentype'); font-weight:400; font-style:normal; }
+  @font-face { font-family:'NHG'; src:url('fonts/NHG-Medium.otf') format('opentype'); font-weight:500; font-style:normal; }
+  @font-face { font-family:'NHG'; src:url('fonts/NHG-Bold.otf') format('opentype'); font-weight:700; font-style:normal; }
+  html { font-size: 100%; }
+  body { margin: 0; background: #FFFFFF; }
+  * { box-sizing: border-box; }
+  ::selection { background: #FF5A1F; color: #FFFFFF; }
+  a.dslink { color:#4D80E6; text-decoration:none; border-bottom:1px solid rgba(77,128,230,0.35); }
+  a.dslink:hover { border-bottom-color:#4D80E6; }
+  @keyframes dsblink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+  @keyframes dsshimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+</style>
+</helmet>
+
+<div style="font-family:'NHG',sans-serif; font-size:1rem; color:#18181B; width:1440px; margin:0 auto; background-color:#FFFFFF; background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22><filter id=%22n%22><feTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%222%22 stitchTiles=%22stitch%22/><feColorMatrix type=%22matrix%22 values=%220 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.02 0%22/></filter><rect width=%22200%22 height=%22200%22 filter=%22url(%23n)%22/></svg>'); background-repeat:repeat;">
+
+  <!-- ===== HEADER ===== -->
+  <header style="display:grid; grid-template-columns:repeat(12,1fr); gap:24px; padding:56px 64px 48px; border-bottom:1px solid #E5E4E6;">
+    <div style="grid-column:1/13; display:flex; justify-content:space-between; align-items:center;">
+      <img src="assets/clark-logo.svg" alt="Clark" style="height:26px; width:auto; display:block;">
+      <div style="font:400 0.8125rem/1 'IBM Plex Mono',monospace; color:#86858C;">v4 · Canvas Portfolio · Swiss-minimal</div>
+    </div>
+    <h1 style="grid-column:1/9; margin:32px 0 0; font:700 6rem/0.98 'NHG',sans-serif; letter-spacing:-0.03em;">Design<br>System</h1>
+    <p style="grid-column:9/13; align-self:end; margin:0 0 4px; font:400 1rem/1.5 'NHG',sans-serif; color:#58565D;">Reference for the infinite canvas portfolio. Clean, open, elegant, Swiss-grid forward-thinking — paper white, one accent, no noise.</p>
+  </header>
+
+  <!-- ===== COLOR ===== -->
+  <section style="padding:56px 64px; border-bottom:1px solid #E5E4E6;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:32px;">
+      <span style="font:500 0.75rem/1 'IBM Plex Mono',monospace; background:#18181B; color:#FFFFFF; padding:4px 8px; border-radius:3px;">01</span>
+      <h2 style="margin:0; font:700 1.75rem/1 'NHG',sans-serif; letter-spacing:-0.01em;">Color</h2>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(6,1fr); gap:16px;">
+
+      <div>
+        <div style="height:140px; background:#FFFFFF; border:1px solid #E5E4E6; border-radius:4px;"></div>
+        <div style="margin-top:10px; font:500 0.8125rem/1.3 'IBM Plex Mono',monospace;">Paper (base)</div>
+        <div style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">#FFFFFF + 2% grain</div>
+      </div>
+
+      <div>
+        <div style="height:140px; background:#FAFAFB; border:1px solid #E5E4E6; border-radius:4px;"></div>
+        <div style="margin-top:10px; font:500 0.8125rem/1.3 'IBM Plex Mono',monospace;">Surface</div>
+        <div style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">#FAFAFB</div>
+      </div>
+
+      <div>
+        <div style="height:140px; background:#18181B; border-radius:4px;"></div>
+        <div style="margin-top:10px; font:500 0.8125rem/1.3 'IBM Plex Mono',monospace;">Ink</div>
+        <div style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">#18181B</div>
+      </div>
+
+      <div>
+        <div style="height:140px; background:#86858C; border-radius:4px;"></div>
+        <div style="margin-top:10px; font:500 0.8125rem/1.3 'IBM Plex Mono',monospace;">Ink / 55</div>
+        <div style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">#86858C</div>
+      </div>
+
+      <div>
+        <div style="height:140px; background:#E5E4E6; border-radius:4px;"></div>
+        <div style="margin-top:10px; font:500 0.8125rem/1.3 'IBM Plex Mono',monospace;">Stroke / border</div>
+        <div style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">#E5E4E6</div>
+      </div>
+
+      <div>
+        <div style="height:140px; background:#FF5A1F; border-radius:4px;"></div>
+        <div style="margin-top:10px; font:500 0.8125rem/1.3 'IBM Plex Mono',monospace;">Accent</div>
+        <div style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">#FF5A1F</div>
+      </div>
+
+      <div>
+        <div style="height:140px; background:#4D80E6; border-radius:4px;"></div>
+        <div style="margin-top:10px; font:500 0.8125rem/1.3 'IBM Plex Mono',monospace;">Link</div>
+        <div style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">#4D80E6</div>
+      </div>
+
+      <div>
+        <div style="height:140px; background:#ECEBEE; border-radius:4px;"></div>
+        <div style="margin-top:10px; font:500 0.8125rem/1.3 'IBM Plex Mono',monospace;">Card grey</div>
+        <div style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">#ECEBEE</div>
+      </div>
+
+      <div>
+        <div style="height:140px; background:#E1E0E4; border-radius:4px;"></div>
+        <div style="margin-top:10px; font:500 0.8125rem/1.3 'IBM Plex Mono',monospace;">Card grey / hover</div>
+        <div style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">#E1E0E4</div>
+      </div>
+
+      <div>
+        <div style="height:140px; background:#C4453F; border-radius:4px;"></div>
+        <div style="margin-top:10px; font:500 0.8125rem/1.3 'IBM Plex Mono',monospace;">Error</div>
+        <div style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">#C4453F — forms only</div>
+      </div>
+
+    </div>
+    <p style="margin:24px 0 0; font:400 0.8125rem/1.6 'NHG',sans-serif; color:#86858C; max-width:680px;">Neutrals shifted from a warm greige to a cool, slightly indigo-tinted grey — in the spirit of traditional Japanese "nezumi" (mouse-grey) pigments — while keeping pure white as the base, ink as the only true dark, orange as the primary accent, and a single indigo blue reserved for links. No gradients anywhere.</p>
+    <p style="margin:10px 0 0; font:400 1rem/1.6 'NHG',sans-serif; color:#3A3830;">Example in context: read the <a class="dslink" href="#">full case study</a> for specs and process.</p>
+  </section>
+
+  <!-- ===== TYPE ===== -->
+  <section style="padding:56px 64px; border-bottom:1px solid #E5E4E6;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:32px;">
+      <span style="font:500 0.75rem/1 'IBM Plex Mono',monospace; background:#18181B; color:#FFFFFF; padding:4px 8px; border-radius:3px;">02</span>
+      <h2 style="margin:0; font:700 1.75rem/1 'NHG',sans-serif; letter-spacing:-0.01em;">Type</h2>
+    </div>
+    <p style="margin:0 0 20px; font:400 0.8125rem/1.6 'IBM Plex Mono',monospace; color:#86858C; max-width:640px;">All type sizes are set in rem, keyed to the root font-size — they scale with browser zoom and user font-size preferences rather than being pinned to a fixed pixel value.</p>
+
+    <div style="font:500 0.6875rem 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.04em; color:#86858C; margin-bottom:8px;">Headline — Neue Haas Grotesk, 700 Bold</div>
+    <div style="display:grid; grid-template-columns:220px 1fr; gap:24px; align-items:baseline; padding:16px 0; border-top:1px solid #E5E4E6;">
+      <div style="font:400 0.8125rem 'IBM Plex Mono',monospace; color:#86858C;">NHG 700 / 6rem</div>
+      <div style="font:700 6rem/0.95 'NHG',sans-serif; letter-spacing:-0.03em;">Display</div>
+    </div>
+    <div style="display:grid; grid-template-columns:220px 1fr; gap:24px; align-items:baseline; padding:16px 0; border-top:1px solid #E5E4E6; border-bottom:1px solid #E5E4E6;">
+      <div style="font:400 0.8125rem 'IBM Plex Mono',monospace; color:#86858C;">NHG 700 / 2.5rem</div>
+      <div style="font:700 2.5rem/1.1 'NHG',sans-serif; letter-spacing:-0.01em;">Section heading</div>
+    </div>
+
+    <div style="font:500 0.6875rem 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.04em; color:#86858C; margin:32px 0 8px;">Body — Neue Haas Grotesk, 400 (Helvetica stand-in)</div>
+    <div style="display:grid; grid-template-columns:220px 1fr; gap:24px; align-items:baseline; padding:16px 0; border-top:1px solid #E5E4E6; border-bottom:1px solid #E5E4E6;">
+      <div style="font:400 0.8125rem 'IBM Plex Mono',monospace; color:#86858C;">NHG 400 / 1.125rem</div>
+      <div style="font:400 1.125rem/1.6 'NHG',sans-serif; max-width:640px;">Body copy. Neue Haas Grotesk Regular is used wherever Helvetica would normally sit — same grid, cleaner license, near-identical texture.</div>
+    </div>
+
+    <div style="font:500 0.6875rem 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.04em; color:#86858C; margin:32px 0 8px;">Labels / small — IBM Plex Mono, 500→300</div>
+    <div style="display:grid; grid-template-columns:220px 1fr; gap:24px; align-items:baseline; padding:16px 0; border-top:1px solid #E5E4E6;">
+      <div style="font:400 0.8125rem 'IBM Plex Mono',monospace; color:#86858C;">Plex Mono 500 / 0.8125rem</div>
+      <div style="font:500 0.8125rem/1.4 'IBM Plex Mono',monospace; letter-spacing:0.02em; text-transform:uppercase;">CARD LABEL — PROJECT TITLE — 2026</div>
+    </div>
+    <div style="display:grid; grid-template-columns:220px 1fr; gap:24px; align-items:baseline; padding:16px 0; border-top:1px solid #E5E4E6;">
+      <div style="font:400 0.8125rem 'IBM Plex Mono',monospace; color:#86858C;">Plex Mono 400 / 0.8125rem — UI text</div>
+      <div style="font:400 0.8125rem/1.4 'IBM Plex Mono',monospace; color:#58565D;">Nav items, command labels, metadata rows</div>
+    </div>
+    <div style="display:grid; grid-template-columns:220px 1fr; gap:24px; align-items:baseline; padding:16px 0; border-top:1px solid #E5E4E6; border-bottom:1px solid #E5E4E6;">
+      <div style="font:400 0.8125rem 'IBM Plex Mono',monospace; color:#86858C;">Plex Mono 300 / 0.5rem — micro</div>
+      <div style="font:300 0.5rem/1.5 'IBM Plex Mono',monospace; letter-spacing:0.01em; color:#86858C;">© 2026 CHARLES CLARK — ALL RIGHTS RESERVED &nbsp;·&nbsp; name@email.com &nbsp;·&nbsp; MESSAGE</div>
+    </div>
+  </section>
+
+  <!-- ===== GRID / SPACING ===== -->
+  <section style="padding:56px 64px; border-bottom:1px solid #E5E4E6;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:32px;">
+      <span style="font:500 0.75rem/1 'IBM Plex Mono',monospace; background:#18181B; color:#FFFFFF; padding:4px 8px; border-radius:3px;">03</span>
+      <h2 style="margin:0; font:700 1.75rem/1 'NHG',sans-serif; letter-spacing:-0.01em;">Grid &amp; spacing</h2>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(12,1fr); gap:8px; height:120px; margin-bottom:20px;">
+      <div style="background:#FAFAFB; border:1px solid #E5E4E6; grid-column:span 1;"></div><div style="background:#FAFAFB; border:1px solid #E5E4E6; grid-column:span 1;"></div><div style="background:#FAFAFB; border:1px solid #E5E4E6; grid-column:span 1;"></div><div style="background:#FAFAFB; border:1px solid #E5E4E6; grid-column:span 1;"></div><div style="background:#FAFAFB; border:1px solid #E5E4E6; grid-column:span 1;"></div><div style="background:#FAFAFB; border:1px solid #E5E4E6; grid-column:span 1;"></div><div style="background:#FAFAFB; border:1px solid #E5E4E6; grid-column:span 1;"></div><div style="background:#FAFAFB; border:1px solid #E5E4E6; grid-column:span 1;"></div><div style="background:#FAFAFB; border:1px solid #E5E4E6; grid-column:span 1;"></div><div style="background:#FAFAFB; border:1px solid #E5E4E6; grid-column:span 1;"></div><div style="background:#FAFAFB; border:1px solid #E5E4E6; grid-column:span 1;"></div><div style="background:#FAFAFB; border:1px solid #E5E4E6; grid-column:span 1;"></div>
+    </div>
+    <div style="display:flex; gap:24px; font:400 0.8125rem 'IBM Plex Mono',monospace; color:#86858C;">
+      <div>12-col grid</div><div>·</div><div>16px base unit</div><div>·</div><div>64px page margin</div><div>·</div><div>Base radius 4px</div>
+    </div>
+  </section>
+
+  <!-- ===== CANVAS CARD COMPONENTS ===== -->
+  <section style="padding:56px 64px; border-bottom:1px solid #E5E4E6;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+      <span style="font:500 0.75rem/1 'IBM Plex Mono',monospace; background:#18181B; color:#FFFFFF; padding:4px 8px; border-radius:3px;">04</span>
+      <h2 style="margin:0; font:700 1.75rem/1 'NHG',sans-serif; letter-spacing:-0.01em;">Canvas card components</h2>
+    </div>
+
+    <div style="font:500 0.75rem 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.04em; color:#86858C; margin-bottom:16px;">Card sizes — full project view</div>
+    <div style="display:flex; gap:24px; align-items:flex-end; flex-wrap:wrap; margin-bottom:40px;">
+
+      <div>
+        <div style="width:160px; height:160px; background:#ECEBEE; border-radius:4px; display:flex; align-items:flex-end; padding:12px;">
+          <span style="font:500 0.6875rem/1.3 'IBM Plex Mono',monospace; letter-spacing:0.02em; text-transform:uppercase; color:#18181B;">UNTITLED — 01</span>
+        </div>
+        <div style="margin-top:10px; font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">Photo · 1×1 square</div>
+      </div>
+
+      <div>
+        <div style="width:160px; height:340px; background:#ECEBEE; border-radius:4px; display:flex; align-items:flex-end; padding:12px;">
+          <span style="font:500 0.6875rem/1.3 'IBM Plex Mono',monospace; letter-spacing:0.02em; text-transform:uppercase; color:#18181B;">UNTITLED — 02</span>
+        </div>
+        <div style="margin-top:10px; font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">Photo · 1×2 portrait</div>
+      </div>
+
+      <div>
+        <div style="width:340px; height:160px; background:#ECEBEE; border-radius:4px; display:flex; align-items:flex-end; padding:14px;">
+          <span style="font:500 0.6875rem/1.3 'IBM Plex Mono',monospace; letter-spacing:0.02em; text-transform:uppercase; color:#18181B;">PROJECT NAME — 2026</span>
+        </div>
+        <div style="margin-top:10px; font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">Project · 2×1 landscape</div>
+      </div>
+
+      <div>
+        <div style="width:340px; height:340px; background:#ECEBEE; border-radius:4px; display:flex; align-items:flex-end; padding:14px;">
+          <span style="font:500 0.6875rem/1.3 'IBM Plex Mono',monospace; letter-spacing:0.02em; text-transform:uppercase; color:#18181B;">PROJECT NAME — 2026</span>
+        </div>
+        <div style="margin-top:10px; font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">Project · 2×2 square (featured)</div>
+      </div>
+
+      <div>
+        <div style="width:520px; height:160px; background:#ECEBEE; border-radius:4px; display:flex; align-items:flex-end; padding:14px;">
+          <span style="font:500 0.6875rem/1.3 'IBM Plex Mono',monospace; letter-spacing:0.02em; text-transform:uppercase; color:#18181B;">PROJECT NAME — 2026</span>
+        </div>
+        <div style="margin-top:10px; font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">Project · 3×1 wide</div>
+      </div>
+
+      <div>
+        <div style="width:160px; height:160px; background:#ECEBEE; border-radius:4px; position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+          <div style="position:absolute; inset:0; backdrop-filter:blur(6px); background:rgba(255,255,255,0.35);"></div>
+          <div style="position:relative; width:16px; height:16px; border:1.5px solid #58565D; border-radius:3px;"></div>
+        </div>
+        <div style="margin-top:10px; font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">Private · blurred + lock, set per item</div>
+      </div>
+
+    </div>
+
+    <div style="display:flex; gap:32px; align-items:flex-start; flex-wrap:wrap;">
+      <div>
+        <div style="display:inline-flex; align-items:center; justify-content:center; padding:14px 28px; border:1px solid #18181B; border-radius:4px; white-space:nowrap;">
+          <span style="font:500 0.8125rem 'NHG',sans-serif;">Send message</span>
+        </div>
+        <div style="margin-top:10px; font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">Primary CTA · 14px/28px padding, 48px target</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMMAND PALETTE — TERMINAL ===== -->
+  <section style="padding:56px 64px; border-bottom:1px solid #E5E4E6;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+      <span style="font:500 0.75rem/1 'IBM Plex Mono',monospace; background:#18181B; color:#FFFFFF; padding:4px 8px; border-radius:3px;">04b</span>
+      <h2 style="margin:0; font:700 1.75rem/1 'NHG',sans-serif; letter-spacing:-0.01em;">Command palette — terminal</h2>
+    </div>
+    <p style="margin:0 0 24px; font:400 0.875rem/1.6 'NHG',sans-serif; color:#86858C; max-width:640px;">Reads left to right, top to bottom, in priority order: Work first, then Info, Photography, Playground — the exploratory-design section — then Contact and the utility keys.</p>
+
+    <div style="width:780px; background:#FAFAFB; border:1px solid #E5E4E6; border-radius:6px; padding:32px 36px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; padding-bottom:20px; border-bottom:1px dashed #E5E4E6;">
+        <div style="display:flex; align-items:center; gap:8px; font:500 0.8125rem/1 'IBM Plex Mono',monospace; color:#18181B;">
+          <svg width="0.85em" height="0.85em" viewBox="0 0 24 24" fill="none" stroke="#18181B" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"><polyline points="6 4 16 12 6 20"></polyline></svg>
+          <span style="width:2px; height:1em; background:#18181B; animation:dsblink 1s step-end infinite;"></span>
+        </div>
+        <button onClick="{{ togglePalette }}" style="width:36px; height:36px; border:1px solid #E5E4E6; border-radius:4px; background:#FFFFFF; display:flex; align-items:center; justify-content:center; cursor:pointer; padding:0;">
+          <span style="font:400 1rem 'IBM Plex Mono',monospace; color:#58565D; transform:{{ arrowTransform }}; display:inline-block; transition:transform 0.15s ease;">⌃</span>
+        </button>
+      </div>
+
+      <sc-if value="{{ paletteOpen }}" hint-placeholder-val="{{ true }}">
+        <div style="font:400 0.8125rem 'IBM Plex Mono',monospace; color:#86858C; padding:20px 0 16px;">Available commands:</div>
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:0;">
+
+          <div style="display:flex; flex-direction:column; gap:12px; padding-right:20px;">
+            <span style="font:500 0.75rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:3px; padding:4px 9px; width:fit-content;">work</span>
+            <span style="font:500 0.75rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:3px; padding:4px 9px; width:fit-content;">info</span>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:12px; padding:0 20px; border-left:1px solid #E5E4E6;">
+            <span style="font:500 0.75rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:3px; padding:4px 9px; width:fit-content;">photo</span>
+            <span style="font:500 0.75rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:3px; padding:4px 9px; width:fit-content;">playground</span>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:12px; padding:0 20px; border-left:1px solid #E5E4E6;">
+            <span style="font:500 0.75rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:3px; padding:4px 9px; width:fit-content;">contact</span>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:12px; padding-left:20px; border-left:1px solid #E5E4E6;">
+            <span style="display:flex; align-items:center; gap:8px;">
+              <span style="font:500 0.75rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:3px; padding:4px 9px;">esc</span>
+              <span style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">- back</span>
+            </span>
+            <span style="font:500 0.75rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:3px; padding:4px 9px; width:fit-content;">help</span>
+          </div>
+
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <!-- ===== PROJECT DETAIL — BENTO ===== -->
+  <section style="padding:56px 64px; border-bottom:1px solid #E5E4E6;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+      <span style="font:500 0.75rem/1 'IBM Plex Mono',monospace; background:#18181B; color:#FFFFFF; padding:4px 8px; border-radius:3px;">05</span>
+      <h2 style="margin:0; font:700 1.75rem/1 'NHG',sans-serif; letter-spacing:-0.01em;">Project detail — bento grid</h2>
+    </div>
+    <p style="margin:0 0 24px; font:400 0.875rem/1.6 'NHG',sans-serif; color:#86858C; max-width:640px;">What clicking into a card opens: fixed meta column, bento of source images at their native aspect — most assets land as 16:9 or 9:16, so tiles are sized to those ratios directly rather than cropped to a fixed grid.</p>
+
+    <div style="border:1px solid #E5E4E6; border-radius:4px; overflow:hidden;">
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:16px 24px; border-bottom:1px solid #E5E4E6;">
+        <div style="display:flex; align-items:baseline; gap:12px;">
+          <span style="font:500 0.75rem 'IBM Plex Mono',monospace; letter-spacing:0.03em; text-transform:uppercase;">Project title</span>
+          <span style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">2026</span>
+        </div>
+        <button style="width:28px; height:28px; border:none; background:transparent; padding:0; cursor:pointer; display:flex; align-items:center; justify-content:center; color:#58565D;" aria-label="Close, return to grid">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg>
+        </button>
+      </div>
+
+      <div style="display:grid; grid-template-columns:280px 1fr; gap:0;">
+        <div style="padding:32px; border-right:1px solid #E5E4E6;">
+          <h3 style="margin:0 0 20px; font:700 1.625rem/1.15 'NHG',sans-serif; letter-spacing:-0.01em;">Project Title Here</h3>
+          <div style="display:flex; flex-direction:column; gap:6px; margin-bottom:20px; font:400 0.8125rem 'IBM Plex Mono',monospace; color:#86858C;">
+            <div><span style="color:#18181B;">Year</span> — 2026</div>
+            <div><span style="color:#18181B;">Type</span> — Personal</div>
+            <div><span style="color:#18181B;">Client</span> — —</div>
+            <div><span style="color:#18181B;">Role</span> — Design, direction</div>
+          </div>
+          <p style="margin:0; font:400 0.875rem/1.6 'NHG',sans-serif; color:#58565D;">Short project description sits here — two to three sentences on the brief, approach, and outcome.</p>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:2px; background:#E5E4E6;">
+          <div style="grid-column:1/3; aspect-ratio:16/9; background:#ECEBEE; display:flex; align-items:flex-end; padding:14px;">
+            <span style="font:500 0.6875rem 'IBM Plex Mono',monospace; color:#86858C;">1920 × 1080</span>
+          </div>
+          <div style="aspect-ratio:9/16; background:#ECEBEE; display:flex; align-items:flex-end; padding:14px;">
+            <span style="font:500 0.6875rem 'IBM Plex Mono',monospace; color:#86858C;">1080 × 1920</span>
+          </div>
+          <div style="aspect-ratio:9/16; background:#ECEBEE; display:flex; align-items:flex-end; padding:14px;">
+            <span style="font:500 0.6875rem 'IBM Plex Mono',monospace; color:#86858C;">1080 × 1920</span>
+          </div>
+          <div style="grid-column:1/3; aspect-ratio:16/9; background:#ECEBEE; display:flex; align-items:flex-end; padding:14px;">
+            <span style="font:500 0.6875rem 'IBM Plex Mono',monospace; color:#86858C;">1920 × 1080</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CANVAS VIEW ===== -->
+  <section style="padding:56px 64px; border-bottom:1px solid #E5E4E6;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+      <span style="font:500 0.75rem/1 'IBM Plex Mono',monospace; background:#18181B; color:#FFFFFF; padding:4px 8px; border-radius:3px;">06</span>
+      <h2 style="margin:0; font:700 1.75rem/1 'NHG',sans-serif; letter-spacing:-0.01em;">Canvas view</h2>
+    </div>
+    <p style="margin:0 0 24px; font:400 0.875rem/1.6 'NHG',sans-serif; color:#86858C; max-width:640px;">Field treatment, confirmed direction: even scatter of cards across open white space, quiet and legible at rest.</p>
+    <div id="canvasA" style="position:relative; width:1280px; height:640px; background:#FFFFFF; border:1px solid #E5E4E6; border-radius:4px; overflow:hidden;">
+      <div style="position:absolute; left:50%; bottom:28px; transform:translateX(-50%); width:700px; background:#FAFAFB; border:1px solid #E5E4E6; border-radius:6px; padding:24px 28px; box-shadow:0 20px 48px rgba(24,24,27,0.10); z-index:2;">
+        <div style="display:flex; align-items:center; justify-content:space-between; padding-bottom:16px; border-bottom:1px dashed #E5E4E6;">
+          <div style="display:flex; align-items:center; gap:8px; font:500 0.8125rem/1 'IBM Plex Mono',monospace; color:#18181B;">
+            <svg width="0.85em" height="0.85em" viewBox="0 0 24 24" fill="none" stroke="#18181B" stroke-width="2.5" stroke-linecap="square" stroke-linejoin="miter"><polyline points="6 4 16 12 6 20"></polyline></svg>
+            <span style="width:2px; height:1em; background:#18181B; animation:dsblink 1s step-end infinite;"></span>
+          </div>
+          <button onClick="{{ togglePalette }}" style="width:32px; height:32px; border:1px solid #E5E4E6; border-radius:4px; background:#FFFFFF; display:flex; align-items:center; justify-content:center; cursor:pointer; padding:0;">
+            <span style="font:400 0.9375rem 'IBM Plex Mono',monospace; color:#58565D; transform:{{ arrowTransform }}; display:inline-block; transition:transform 0.15s ease;">⌃</span>
+          </button>
+        </div>
+
+        <sc-if value="{{ paletteOpen }}" hint-placeholder-val="{{ true }}">
+          <div style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C; padding:16px 0 14px;">Available commands:</div>
+          <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:0;">
+
+            <div style="display:flex; flex-direction:column; gap:10px; padding-right:16px;">
+              <span style="font:500 0.6875rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:3px; padding:4px 8px; width:fit-content;">work</span>
+              <span style="font:500 0.6875rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:3px; padding:4px 8px; width:fit-content;">info</span>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:10px; padding:0 16px; border-left:1px solid #E5E4E6;">
+              <span style="font:500 0.6875rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:3px; padding:4px 8px; width:fit-content;">photo</span>
+              <span style="font:500 0.6875rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:3px; padding:4px 8px; width:fit-content;">playground</span>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:10px; padding:0 16px; border-left:1px solid #E5E4E6;">
+              <span style="font:500 0.6875rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:3px; padding:4px 8px; width:fit-content;">contact</span>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:10px; padding-left:16px; border-left:1px solid #E5E4E6;">
+              <span style="display:flex; align-items:center; gap:6px;">
+                <span style="font:500 0.6875rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:3px; padding:4px 8px;">esc</span>
+                <span style="font:400 0.6875rem 'IBM Plex Mono',monospace; color:#86858C;">- back</span>
+              </span>
+              <span style="font:500 0.6875rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:3px; padding:4px 8px; width:fit-content;">help</span>
+            </div>
+
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CARD & BUTTON STATES ===== -->
+  <section style="padding:56px 64px; border-bottom:1px solid #E5E4E6;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+      <span style="font:500 0.75rem/1 'IBM Plex Mono',monospace; background:#18181B; color:#FFFFFF; padding:4px 8px; border-radius:3px;">07</span>
+      <h2 style="margin:0; font:700 1.75rem/1 'NHG',sans-serif; letter-spacing:-0.01em;">Card &amp; button states</h2>
+    </div>
+    <p style="margin:0 0 24px; font:400 0.875rem/1.6 'NHG',sans-serif; color:#86858C; max-width:640px;">Selection is never shown with color — only elevation (drop shadow), following Material's shadow-based elevation model. Focus is the same: a drop shadow, never a grey stroke. Color is reserved for the orange accent on primary actions and the indigo blue on links.</p>
+
+    <div style="font:500 0.75rem 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.04em; color:#86858C; margin-bottom:16px;">Elevation scale</div>
+    <div style="display:flex; gap:24px; margin-bottom:40px;">
+      <div style="width:100px; height:70px; background:#FFFFFF; border-radius:4px; border:1px solid #E5E4E6; box-shadow:none; display:flex; align-items:center; justify-content:center; font:400 0.6875rem 'IBM Plex Mono',monospace; color:#86858C;">e0</div>
+      <div style="width:100px; height:70px; background:#FFFFFF; border-radius:4px; box-shadow:0 1px 3px rgba(24,24,27,0.08); display:flex; align-items:center; justify-content:center; font:400 0.6875rem 'IBM Plex Mono',monospace; color:#86858C;">e1</div>
+      <div style="width:100px; height:70px; background:#FFFFFF; border-radius:4px; box-shadow:0 4px 10px rgba(24,24,27,0.10); display:flex; align-items:center; justify-content:center; font:400 0.6875rem 'IBM Plex Mono',monospace; color:#86858C;">e2</div>
+      <div style="width:100px; height:70px; background:#FFFFFF; border-radius:4px; box-shadow:0 10px 24px rgba(24,24,27,0.14); display:flex; align-items:center; justify-content:center; font:400 0.6875rem 'IBM Plex Mono',monospace; color:#86858C;">e3</div>
+      <div style="width:100px; height:70px; background:#FFFFFF; border-radius:4px; box-shadow:0 20px 48px rgba(24,24,27,0.18); display:flex; align-items:center; justify-content:center; font:400 0.6875rem 'IBM Plex Mono',monospace; color:#86858C;">e4</div>
+    </div>
+
+    <div style="font:500 0.75rem 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.04em; color:#86858C; margin-bottom:16px;">Card</div>
+    <div style="display:flex; gap:24px; flex-wrap:wrap; margin-bottom:40px;">
+      <div>
+        <div style="width:180px; height:180px; background:#ECEBEE; border-radius:4px; display:flex; align-items:flex-end; padding:12px;">
+          <span style="font:500 0.6875rem 'IBM Plex Mono',monospace; text-transform:uppercase;">Default</span>
+        </div>
+        <div style="margin-top:8px; font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">Default · e0</div>
+      </div>
+      <div>
+        <div style="width:180px; height:180px; background:#ECEBEE; border-radius:4px; box-shadow:0 6px 16px rgba(24,24,27,0.10); display:flex; align-items:flex-end; padding:12px; transform:translateY(-2px);">
+          <span style="font:500 0.6875rem 'IBM Plex Mono',monospace; text-transform:uppercase;">Hover</span>
+        </div>
+        <div style="margin-top:8px; font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">Hover · e2, lifts</div>
+      </div>
+      <div>
+        <div style="width:180px; height:180px; background:#E1E0E4; border-radius:4px; box-shadow:0 1px 3px rgba(24,24,27,0.08); display:flex; align-items:flex-end; padding:12px; transform:scale(0.98);">
+          <span style="font:500 0.6875rem 'IBM Plex Mono',monospace; text-transform:uppercase;">Active</span>
+        </div>
+        <div style="margin-top:8px; font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">Active / pressed · e1, scale 0.98</div>
+      </div>
+      <div>
+        <div style="width:180px; height:180px; background:#ECEBEE; border-radius:4px; box-shadow:0 16px 36px rgba(24,24,27,0.16); display:flex; align-items:flex-end; padding:12px;">
+          <span style="font:500 0.6875rem 'IBM Plex Mono',monospace; text-transform:uppercase;">Selected</span>
+        </div>
+        <div style="margin-top:8px; font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">Selected · e3, no color change</div>
+      </div>
+      <div>
+        <div style="width:180px; height:180px; background:#F7F7F8; border-radius:4px; border:1px solid #E5E4E6; display:flex; align-items:flex-end; padding:12px;">
+          <span style="font:500 0.6875rem 'IBM Plex Mono',monospace; text-transform:uppercase; color:#C6C5C9;">Loading</span>
+        </div>
+        <div style="margin-top:8px; font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">Loading · low-opacity fill</div>
+      </div>
+    </div>
+
+    <div style="font:500 0.75rem 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.04em; color:#86858C; margin-bottom:16px;">Button</div>
+    <div style="display:flex; gap:24px; flex-wrap:wrap;">
+      <div>
+        <div style="display:inline-flex; align-items:center; justify-content:center; padding:14px 28px; border:1px solid #18181B; border-radius:4px; white-space:nowrap;">
+          <span style="font:500 0.8125rem 'NHG',sans-serif;">Default</span>
+        </div>
+        <div style="margin-top:8px; font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">Default</div>
+      </div>
+      <div>
+        <div style="display:inline-flex; align-items:center; justify-content:center; padding:14px 28px; background:#18181B; border:1px solid #18181B; border-radius:4px; box-shadow:0 6px 16px rgba(24,24,27,0.18); white-space:nowrap;">
+          <span style="font:500 0.8125rem 'NHG',sans-serif; color:#FFFFFF;">Hover</span>
+        </div>
+        <div style="margin-top:8px; font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">Hover · fills solid, lifts</div>
+      </div>
+      <div>
+        <div style="display:inline-flex; align-items:center; justify-content:center; padding:14px 28px; background:#2E2D31; border:1px solid #2E2D31; border-radius:4px; white-space:nowrap;">
+          <span style="font:500 0.8125rem 'NHG',sans-serif; color:#FFFFFF;">Active</span>
+        </div>
+        <div style="margin-top:8px; font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">Active / pressed</div>
+      </div>
+      <div>
+        <div style="display:inline-flex; align-items:center; justify-content:center; padding:14px 28px; background:#FFFFFF; border:1px solid transparent; border-radius:4px; box-shadow:0 8px 20px rgba(24,24,27,0.16); white-space:nowrap;">
+          <span style="font:500 0.8125rem 'NHG',sans-serif;">Focus</span>
+        </div>
+        <div style="margin-top:8px; font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">Focus-visible · drop shadow only, no stroke</div>
+      </div>
+      <div>
+        <div style="display:inline-flex; align-items:center; justify-content:center; padding:14px 28px; border:1px solid #E5E4E6; border-radius:4px; white-space:nowrap;">
+          <span style="font:500 0.8125rem 'NHG',sans-serif; color:#C6C5C9;">Disabled</span>
+        </div>
+        <div style="margin-top:8px; font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">Disabled</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FORM FIELDS ===== -->
+  <section style="padding:56px 64px; border-bottom:1px solid #E5E4E6;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+      <span style="font:500 0.75rem/1 'IBM Plex Mono',monospace; background:#18181B; color:#FFFFFF; padding:4px 8px; border-radius:3px;">08</span>
+      <h2 style="margin:0; font:700 1.75rem/1 'NHG',sans-serif; letter-spacing:-0.01em;">Form fields</h2>
+    </div>
+    <p style="margin:0 0 24px; font:400 0.875rem/1.6 'NHG',sans-serif; color:#86858C; max-width:640px;">Contact form and any future field. Focus is a drop shadow, same rule as buttons and cards. Error is the one place color carries meaning beyond orange/blue — a muted brick red, used sparingly.</p>
+
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:24px; margin-bottom:32px;">
+      <div>
+        <label style="display:block; font:500 0.6875rem 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.04em; color:#86858C; margin-bottom:8px;">Name</label>
+        <div style="padding:14px 16px; border:1px solid #E5E4E6; border-radius:4px; font:400 1rem 'NHG',sans-serif; color:#C6C5C9;">Default</div>
+      </div>
+      <div>
+        <label style="display:block; font:500 0.6875rem 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.04em; color:#86858C; margin-bottom:8px;">Name</label>
+        <div style="padding:14px 16px; border:1px solid #18181B; border-radius:4px; box-shadow:0 6px 16px rgba(24,24,27,0.12); font:400 1rem 'NHG',sans-serif; color:#18181B;">Focus</div>
+      </div>
+      <div>
+        <label style="display:block; font:500 0.6875rem 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.04em; color:#C4453F; margin-bottom:8px;">Email</label>
+        <div style="padding:14px 16px; border:1px solid #C4453F; border-radius:4px; font:400 1rem 'NHG',sans-serif; color:#18181B;">notanemail</div>
+        <div style="margin-top:6px; font:400 0.75rem 'IBM Plex Mono',monospace; color:#C4453F;">Enter a valid email</div>
+      </div>
+      <div>
+        <label style="display:block; font:500 0.6875rem 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.04em; color:#86858C; margin-bottom:8px;">Name</label>
+        <div style="padding:14px 16px; border:1px solid #E5E4E6; border-radius:4px; background:#FAFAFB; font:400 1rem 'NHG',sans-serif; color:#C6C5C9;">Disabled</div>
+      </div>
+    </div>
+
+    <div style="max-width:520px;">
+      <label style="display:block; font:500 0.6875rem 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.04em; color:#86858C; margin-bottom:8px;">Message</label>
+      <div style="padding:14px 16px; height:96px; border:1px solid #E5E4E6; border-radius:4px; font:400 1rem 'NHG',sans-serif; color:#C6C5C9;">Textarea, same treatment as input</div>
+      <div style="margin-top:16px; display:inline-flex; align-items:center; justify-content:center; padding:14px 28px; background:#18181B; border:1px solid #18181B; border-radius:4px; white-space:nowrap;">
+        <span style="font:500 0.8125rem 'NHG',sans-serif; color:#FFFFFF;">Send message</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== EMPTY STATES ===== -->
+  <section style="padding:56px 64px; border-bottom:1px solid #E5E4E6;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+      <span style="font:500 0.75rem/1 'IBM Plex Mono',monospace; background:#18181B; color:#FFFFFF; padding:4px 8px; border-radius:3px;">09</span>
+      <h2 style="margin:0; font:700 1.75rem/1 'NHG',sans-serif; letter-spacing:-0.01em;">Empty states</h2>
+    </div>
+    <p style="margin:0 0 24px; font:400 0.875rem/1.6 'NHG',sans-serif; color:#86858C; max-width:640px;">Same shape for every zero-state: centered icon, one line, no filler copy.</p>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px;">
+      <div style="border:1px solid #E5E4E6; border-radius:4px; padding:48px 24px; display:flex; flex-direction:column; align-items:center; gap:14px;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C6C5C9" stroke-width="1.6"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
+        <span style="font:400 0.8125rem 'IBM Plex Mono',monospace; color:#86858C;">No results found</span>
+      </div>
+      <div style="border:1px solid #E5E4E6; border-radius:4px; padding:48px 24px; display:flex; flex-direction:column; align-items:center; gap:14px;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C6C5C9" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="2"></rect><line x1="4" y1="10" x2="20" y2="10"></line></svg>
+        <span style="font:400 0.8125rem 'IBM Plex Mono',monospace; color:#86858C;">Playground is empty — check back soon</span>
+      </div>
+      <div style="border:1px solid #E5E4E6; border-radius:4px; padding:48px 24px; display:flex; flex-direction:column; align-items:center; gap:14px;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C6C5C9" stroke-width="1.6"><rect x="3" y="3" width="8" height="8" rx="1"></rect><rect x="13" y="3" width="8" height="8" rx="1"></rect><rect x="3" y="13" width="8" height="8" rx="1"></rect><rect x="13" y="13" width="8" height="8" rx="1"></rect></svg>
+        <span style="font:400 0.8125rem 'IBM Plex Mono',monospace; color:#86858C;">Nothing published in this collection</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ICON SET ===== -->
+  <section style="padding:56px 64px; border-bottom:1px solid #E5E4E6;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+      <span style="font:500 0.75rem/1 'IBM Plex Mono',monospace; background:#18181B; color:#FFFFFF; padding:4px 8px; border-radius:3px;">10</span>
+      <h2 style="margin:0; font:700 1.75rem/1 'NHG',sans-serif; letter-spacing:-0.01em;">Icon set</h2>
+    </div>
+    <p style="margin:0 0 24px; font:400 0.875rem/1.6 'NHG',sans-serif; color:#86858C; max-width:640px;">24px grid, 1.6px stroke, square caps — same weight as the palette's chevron icon. Swap in IBM Carbon glyphs directly if preferred; these hold the grid and weight in the meantime.</p>
+    <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:16px;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+        <div style="width:56px; height:56px; border:1px solid #E5E4E6; border-radius:4px; display:flex; align-items:center; justify-content:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#18181B" stroke-width="1.6"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="11 6 5 12 11 18"></polyline></svg></div>
+        <span style="font:400 0.625rem 'IBM Plex Mono',monospace; color:#86858C;">back</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+        <div style="width:56px; height:56px; border:1px solid #E5E4E6; border-radius:4px; display:flex; align-items:center; justify-content:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#18181B" stroke-width="1.6"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></div>
+        <span style="font:400 0.625rem 'IBM Plex Mono',monospace; color:#86858C;">close</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+        <div style="width:56px; height:56px; border:1px solid #E5E4E6; border-radius:4px; display:flex; align-items:center; justify-content:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#18181B" stroke-width="1.6"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg></div>
+        <span style="font:400 0.625rem 'IBM Plex Mono',monospace; color:#86858C;">play</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+        <div style="width:56px; height:56px; border:1px solid #E5E4E6; border-radius:4px; display:flex; align-items:center; justify-content:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#18181B" stroke-width="1.6"><polyline points="15 4 20 4 20 9"></polyline><polyline points="9 20 4 20 4 15"></polyline><line x1="20" y1="4" x2="14" y2="10"></line><line x1="4" y1="20" x2="10" y2="14"></line></svg></div>
+        <span style="font:400 0.625rem 'IBM Plex Mono',monospace; color:#86858C;">expand</span>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+        <div style="width:56px; height:56px; border:1px solid #E5E4E6; border-radius:4px; display:flex; align-items:center; justify-content:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#18181B" stroke-width="1.6"><rect x="5" y="11" width="14" height="9" rx="1"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg></div>
+        <span style="font:400 0.625rem 'IBM Plex Mono',monospace; color:#86858C;">lock</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LIGHTBOX ===== -->
+  <section style="padding:56px 64px; border-bottom:1px solid #E5E4E6;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+      <span style="font:500 0.75rem/1 'IBM Plex Mono',monospace; background:#18181B; color:#FFFFFF; padding:4px 8px; border-radius:3px;">11</span>
+      <h2 style="margin:0; font:700 1.75rem/1 'NHG',sans-serif; letter-spacing:-0.01em;">Lightbox</h2>
+    </div>
+    <p style="margin:0 0 24px; font:400 0.875rem/1.6 'NHG',sans-serif; color:#86858C; max-width:640px;">Scale-in + fade-in on open. Scrim is the one place ink covers the frame — it's an overlay behind the image, not a theme change.</p>
+    <div style="position:relative; width:900px; height:520px; background:#18181B; border-radius:6px; overflow:hidden;">
+      <button style="position:absolute; top:20px; right:20px; width:36px; height:36px; border:none; background:rgba(255,255,255,0.1); border-radius:4px; display:flex; align-items:center; justify-content:center; cursor:pointer;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></button>
+      <button style="position:absolute; top:50%; left:20px; transform:translateY(-50%); width:40px; height:40px; border:none; background:rgba(255,255,255,0.1); border-radius:4px; display:flex; align-items:center; justify-content:center; cursor:pointer;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8"><polyline points="15 6 9 12 15 18"></polyline></svg></button>
+      <button style="position:absolute; top:50%; right:20px; transform:translateY(-50%); width:40px; height:40px; border:none; background:rgba(255,255,255,0.1); border-radius:4px; display:flex; align-items:center; justify-content:center; cursor:pointer;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8"><polyline points="9 6 15 12 9 18"></polyline></svg></button>
+      <div style="position:absolute; inset:64px 96px; background:#3A3830; border-radius:4px;"></div>
+      <div style="position:absolute; left:32px; bottom:24px; font:500 0.8125rem 'IBM Plex Mono',monospace; color:#FFFFFF; text-transform:uppercase; letter-spacing:0.03em;">Project title <span style="color:#86858C; text-transform:none; letter-spacing:0;">— caption sits here</span></div>
+      <div style="position:absolute; right:32px; bottom:24px; font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">03 / 12</div>
+    </div>
+  </section>
+
+  <!-- ===== PRIVATE ITEM UNLOCK ===== -->
+  <section style="padding:56px 64px; border-bottom:1px solid #E5E4E6;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+      <span style="font:500 0.75rem/1 'IBM Plex Mono',monospace; background:#18181B; color:#FFFFFF; padding:4px 8px; border-radius:3px;">12</span>
+      <h2 style="margin:0; font:700 1.75rem/1 'NHG',sans-serif; letter-spacing:-0.01em;">Private-item unlock</h2>
+    </div>
+    <p style="margin:0 0 24px; font:400 0.875rem/1.6 'NHG',sans-serif; color:#86858C; max-width:640px;">A per-item flag (set on the project or photography document), not a site-wide gate. Unlocking one private item never blocks the rest of the canvas.</p>
+    <div style="width:360px; border:1px solid #E5E4E6; border-radius:6px; padding:32px; text-align:center;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#18181B" stroke-width="1.6" style="margin-bottom:16px;"><rect x="5" y="11" width="14" height="9" rx="1"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+      <div style="font:700 1.125rem 'NHG',sans-serif; margin-bottom:6px;">This item is private</div>
+      <div style="font:400 0.8125rem 'NHG',sans-serif; color:#86858C; margin-bottom:20px;">Enter the password to view it</div>
+      <div style="padding:14px 16px; border:1px solid #C4453F; border-radius:4px; font:400 1rem 'NHG',sans-serif; color:#18181B; text-align:left; margin-bottom:6px;">••••••</div>
+      <div style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#C4453F; text-align:left; margin-bottom:16px;">Incorrect password</div>
+      <div style="display:flex; align-items:center; justify-content:center; padding:14px 28px; border:1px solid #FF5A1F; border-radius:4px;">
+        <span style="font:500 0.8125rem 'NHG',sans-serif; color:#FF5A1F;">Unlock</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MOTION ===== -->
+  <section style="padding:56px 64px; border-bottom:1px solid #E5E4E6;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+      <span style="font:500 0.75rem/1 'IBM Plex Mono',monospace; background:#18181B; color:#FFFFFF; padding:4px 8px; border-radius:3px;">13</span>
+      <h2 style="margin:0; font:700 1.75rem/1 'NHG',sans-serif; letter-spacing:-0.01em;">Motion</h2>
+    </div>
+    <p style="margin:0 0 24px; font:400 0.875rem/1.6 'NHG',sans-serif; color:#86858C; max-width:640px;">No parallax, no drift, no auto-animation. Every motion token exists because a person acted — pan, click, hover.</p>
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:#E5E4E6; border:1px solid #E5E4E6; border-radius:4px; overflow:hidden;">
+      <div style="background:#FFFFFF; padding:20px;">
+        <div style="font:500 0.8125rem 'NHG',sans-serif; margin-bottom:6px;">Hover / lift</div>
+        <div style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">150ms · ease-out</div>
+      </div>
+      <div style="background:#FFFFFF; padding:20px;">
+        <div style="font:500 0.8125rem 'NHG',sans-serif; margin-bottom:6px;">Pan / zoom</div>
+        <div style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">direct, no easing while dragging; 300ms ease-out on release</div>
+      </div>
+      <div style="background:#FFFFFF; padding:20px;">
+        <div style="font:500 0.8125rem 'NHG',sans-serif; margin-bottom:6px;">Lightbox open</div>
+        <div style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">250ms · scale 0.96→1 + fade</div>
+      </div>
+      <div style="background:#FFFFFF; padding:20px;">
+        <div style="font:500 0.8125rem 'NHG',sans-serif; margin-bottom:6px;">Command palette</div>
+        <div style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">150ms height/opacity on collapse</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LOADING / SKELETON ===== -->
+  <section style="padding:56px 64px; border-bottom:1px solid #E5E4E6;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+      <span style="font:500 0.75rem/1 'IBM Plex Mono',monospace; background:#18181B; color:#FFFFFF; padding:4px 8px; border-radius:3px;">14</span>
+      <h2 style="margin:0; font:700 1.75rem/1 'NHG',sans-serif; letter-spacing:-0.01em;">Loading</h2>
+    </div>
+    <p style="margin:0 0 24px; font:400 0.875rem/1.6 'NHG',sans-serif; color:#86858C; max-width:640px;">Cards render immediately as grey placeholders — thumbnails fade in over them as they decode, so nothing pops or shifts layout.</p>
+    <div style="display:flex; gap:24px;">
+      <div style="width:160px; height:160px; border-radius:4px; background:linear-gradient(100deg, #F0EFF2 30%, #E4E3E7 45%, #F0EFF2 60%); background-size:200% 100%; animation:dsshimmer 1.4s ease-in-out infinite;"></div>
+      <div style="width:340px; height:160px; border-radius:4px; background:linear-gradient(100deg, #F0EFF2 30%, #E4E3E7 45%, #F0EFF2 60%); background-size:200% 100%; animation:dsshimmer 1.4s ease-in-out infinite;"></div>
+    </div>
+  </section>
+
+  <!-- ===== FAVICON / OG ===== -->
+  <section style="padding:56px 64px; border-bottom:1px solid #E5E4E6;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+      <span style="font:500 0.75rem/1 'IBM Plex Mono',monospace; background:#18181B; color:#FFFFFF; padding:4px 8px; border-radius:3px;">15</span>
+      <h2 style="margin:0; font:700 1.75rem/1 'NHG',sans-serif; letter-spacing:-0.01em;">Favicon &amp; share image</h2>
+    </div>
+    <div style="display:flex; gap:32px; align-items:flex-start;">
+      <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+        <div style="width:56px; height:56px; border:1px solid #E5E4E6; border-radius:8px; display:flex; align-items:center; justify-content:center; background:#FFFFFF;"><img src="assets/clark-logo.svg" alt="Clark mark" style="height:18px; width:auto;"></div>
+        <span style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">Favicon · wordmark</span>
+      </div>
+      <div>
+        <div style="width:420px; height:220px; border:1px solid #E5E4E6; border-radius:6px; background:#FFFFFF; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px;">
+          <img src="assets/clark-logo.svg" alt="Clark" style="height:24px; width:auto;">
+          <span style="font:700 1.125rem 'NHG',sans-serif;">Design &amp; Photography</span>
+        </div>
+        <span style="display:block; margin-top:8px; font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">OG share image · 1200 × 630</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MOBILE DRAWER ===== -->
+  <section style="padding:56px 64px; border-bottom:1px solid #E5E4E6;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+      <span style="font:500 0.75rem/1 'IBM Plex Mono',monospace; background:#18181B; color:#FFFFFF; padding:4px 8px; border-radius:3px;">16</span>
+      <h2 style="margin:0; font:700 1.75rem/1 'NHG',sans-serif; letter-spacing:-0.01em;">Mobile drawer</h2>
+    </div>
+    <p style="margin:0 0 24px; font:400 0.875rem/1.6 'NHG',sans-serif; color:#86858C; max-width:640px;">Below 1024px the terminal becomes a right-slide drawer — same commands, stacked full-width, no columns.</p>
+    <div style="width:320px; height:560px; border:1px solid #E5E4E6; border-radius:16px; position:relative; overflow:hidden; background:#FFFFFF;">
+      <div style="position:absolute; top:16px; left:16px; width:32px; height:32px; border:1px solid #E5E4E6; border-radius:4px; display:flex; align-items:center; justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#18181B" stroke-width="1.8"><line x1="4" y1="7" x2="20" y2="7"></line><line x1="4" y1="12" x2="20" y2="12"></line><line x1="4" y1="17" x2="20" y2="17"></line></svg></div>
+      <div style="position:absolute; top:0; right:0; bottom:0; width:70%; background:#FAFAFB; border-left:1px solid #E5E4E6; padding:24px 20px; display:flex; flex-direction:column; gap:16px;">
+        <div style="display:flex; justify-content:flex-end;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#58565D" stroke-width="1.8"><line x1="6" y1="6" x2="18" y2="18"></line><line x1="18" y1="6" x2="6" y2="18"></line></svg></div>
+        <span style="font:500 0.8125rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:3px; padding:10px 12px; width:fit-content;">work</span>
+        <span style="font:500 0.8125rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:3px; padding:10px 12px; width:fit-content;">info</span>
+        <span style="font:500 0.8125rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:3px; padding:10px 12px; width:fit-content;">photo</span>
+        <span style="font:500 0.8125rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:3px; padding:10px 12px; width:fit-content;">playground</span>
+        <span style="font:500 0.8125rem 'IBM Plex Mono',monospace; background:#ECEBEE; border-radius:3px; padding:10px 12px; width:fit-content;">contact</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CURSORS ===== -->
+  <section style="padding:56px 64px;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+      <span style="font:500 0.75rem/1 'IBM Plex Mono',monospace; background:#18181B; color:#FFFFFF; padding:4px 8px; border-radius:3px;">17</span>
+      <h2 style="margin:0; font:700 1.75rem/1 'NHG',sans-serif; letter-spacing:-0.01em;">Cursor styles</h2>
+    </div>
+    <div style="display:flex; gap:24px;">
+      <div style="width:220px; height:100px; border:1px solid #E5E4E6; border-radius:4px; display:flex; align-items:center; justify-content:center; cursor:grab;">
+        <span style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">grab · open canvas</span>
+      </div>
+      <div style="width:220px; height:100px; border:1px solid #E5E4E6; border-radius:4px; display:flex; align-items:center; justify-content:center; cursor:grabbing;">
+        <span style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">grabbing · while panning</span>
+      </div>
+      <div style="width:220px; height:100px; border:1px solid #E5E4E6; border-radius:4px; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+        <span style="font:400 0.75rem 'IBM Plex Mono',monospace; color:#86858C;">pointer · over a card</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SPACING RULES ===== -->
+  <section style="padding:56px 64px; border-top:1px solid #E5E4E6;">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:32px;">
+      <span style="font:500 0.75rem/1 'IBM Plex Mono',monospace; background:#18181B; color:#FFFFFF; padding:4px 8px; border-radius:3px;">18</span>
+      <h2 style="margin:0; font:700 1.75rem/1 'NHG',sans-serif; letter-spacing:-0.01em;">Spacing, alignment &amp; padding rules</h2>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:48px;">
+
+      <div>
+        <div style="font:500 0.75rem 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.04em; color:#86858C; margin-bottom:16px;">Baseline grid</div>
+        <ul style="margin:0; padding-left:20px; font:400 0.9375rem/1.7 'NHG',sans-serif; color:#3A3830;">
+          <li>All spacing (margin, padding, gap) is a multiple of 8px. 4px is allowed only as a micro-adjustment inside a component (icon-to-label gaps, badge padding), never between components.</li>
+          <li>Section padding is fixed at 56px top and 64px sides, for every section, no exceptions.</li>
+          <li>A number badge and its heading share one row set to <em>align-items: center</em>, not baseline — baseline alignment misaligns a padded badge against cap-height text.</li>
+          <li>Vertical rhythm between a section's parts: 8px label→heading, 24px heading→intro copy, 32–40px intro→content.</li>
+        </ul>
+      </div>
+
+      <div>
+        <div style="font:500 0.75rem 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.04em; color:#86858C; margin-bottom:16px;">Alignment</div>
+        <ul style="margin:0; padding-left:20px; font:400 0.9375rem/1.7 'NHG',sans-serif; color:#3A3830;">
+          <li>Left edges lock to the 12-col grid — never eyeball an offset.</li>
+          <li>Group a label with its value on one baseline (e.g. "Year — 2026"); don't split them across lines.</li>
+          <li>Icons sit in a fixed-size box (24px or 1em) and center visually with their adjacent text, not just their bounding box.</li>
+          <li>Dividers (dashed or solid) sit exactly between two 8px-multiple paddings — never floating mid-gap.</li>
+        </ul>
+      </div>
+
+      <div>
+        <div style="font:500 0.75rem 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.04em; color:#86858C; margin-bottom:16px;">Padding — components</div>
+        <ul style="margin:0; padding-left:20px; font:400 0.9375rem/1.7 'NHG',sans-serif; color:#3A3830;">
+          <li>Buttons: 14px vertical / 28px horizontal, sized by padding, never a fixed width — text always gets room to breathe. Minimum 48px tap height.</li>
+          <li>Cards: 12–14px inner padding at all sizes; label sits flush to the bottom-left.</li>
+          <li>Chips / command badges: 4px vertical / 8–9px horizontal.</li>
+          <li>Containers (palette, detail panel): 24–32px padding, scaled down (~24px) only for a compact/overlay context.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { paletteOpen: true };
+
+  renderVals() {
+    return {
+      paletteOpen: this.state.paletteOpen,
+      arrowTransform: this.state.paletteOpen ? 'rotate(0deg)' : 'rotate(180deg)',
+      togglePalette: () => this.setState(s => ({ paletteOpen: !s.paletteOpen }))
+    };
+  }
+
+  componentDidMount() {
+    this.drawSpiral('canvasA', { count: 46, spacingScale: 1.55, minR: 6, maxR: 16, jitter: 6 });
+  }
+
+  drawSpiral(id, opts) {
+    const host = this.el && this.el.querySelector ? this.el.querySelector('#' + id) : document.getElementById(id);
+    if (!host) return;
+    const w = host.clientWidth, h = host.clientHeight;
+    const cx = w / 2, cy = h / 2;
+    const golden = 137.5077640500378 * Math.PI / 180;
+    const clusters = [
+      { offX: -w * 0.16, offY: 0, start: 0 },
+      { offX: w * 0.18, offY: h * 0.06, start: 40 }
+    ];
+    let frag = document.createDocumentFragment();
+    clusters.forEach(cl => {
+      for (let i = 0; i < opts.count; i++) {
+        const angle = (cl.start + i) * golden;
+        const r = opts.spacingScale * 12 * Math.sqrt(i + 1);
+        const size = opts.minR + ((i % 5) / 4) * (opts.maxR - opts.minR);
+        const jx = opts.jitter ? (Math.sin(i * 12.9898) * opts.jitter) : 0;
+        const jy = opts.jitter ? (Math.cos(i * 78.233) * opts.jitter) : 0;
+        const x = cx + cl.offX + r * Math.cos(angle) + jx;
+        const y = cy + cl.offY + r * Math.sin(angle) + jy;
+        if (x < -20 || y < -20 || x > w + 20 || y > h + 20) continue;
+        const el = document.createElement('div');
+        const isWide = i % 4 === 0;
+        el.style.position = 'absolute';
+        el.style.left = x + 'px';
+        el.style.top = y + 'px';
+        el.style.width = (isWide ? size * 1.8 : size) + 'px';
+        el.style.height = size + 'px';
+        el.style.background = '#ECEBEE';
+        el.style.border = '1px solid #E5E4E6';
+        el.style.borderRadius = '2px';
+        el.style.transform = 'translate(-50%,-50%)';
+        frag.appendChild(el);
+      }
+    });
+    host.appendChild(frag);
+  }
+}
+
+</script>
+</body>
+</html>

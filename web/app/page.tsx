@@ -131,41 +131,10 @@ export default async function Home() {
       >
         <h1>Charles W. Clark — Multidisciplinary Designer &amp; Art Director</h1>
         <p>
-          Print, web, entertainment, SaaS, and now experimental AI — 20+ years of designing
-          across every medium I can get my hands on. I love the challenge. I look forward to building what&apos;s next.
+          Portfolio of Charles W. Clark, a multidisciplinary designer and art director
+          at DemandScience, specializing in branding, digital design, and creative
+          strategy across SaaS, gaming, and lifestyle industries. Based in Indianapolis.
         </p>
-
-        <section aria-label="About Charles W. Clark">
-          <h2>About</h2>
-          <p>
-            Charles W. Clark is a multidisciplinary designer and art director with over 20 years
-            of experience. His career began at the Copperas Cove Leader-Press and Killeen Daily Herald,
-            where he learned newspaper layout and production. He then spent over a decade at NUVO
-            Newsweekly in Indianapolis, growing from designer to Production Manager — overseeing the
-            design team while maintaining print schedules and production. He also learned photography
-            at NUVO, which became a lasting part of his practice.
-          </p>
-          <p>
-            Charlie left NUVO to pursue digital design, which led to a Senior Interactive Designer
-            role and work across the entertainment and gaming space — including projects for
-            Pok&eacute;mon Black &amp; White, Pok&eacute;dex 3D Pro, Enter the Gungeon, Wargaming,
-            R&oacute;nin Tactics, FieldCraft Survival, SKYCURSER, and the Asian Art Museum of
-            San Francisco. His concert photography has covered artists like Pixies and Yo La Tengo.
-          </p>
-          <p>
-            Today at DemandScience, he works in B2B SaaS — helping clients with creative, supporting
-            internal marketing teams with design and production, and championing best-use-case
-            implementation of AI across the organization.
-          </p>
-          <p>
-            In his spare time, Charlie creates experimental art under the name Saboteur. By night,
-            he works on Tommy&apos;s — a comic book where he handles all art and production.
-          </p>
-          <p>
-            I&apos;ve worked across every arena of design — print, web, interactive, and now experimental AI.
-            I love the challenges each one brings, and I look forward to building new things.
-          </p>
-        </section>
 
         <section aria-label="Work">
           <h2>Selected Work</h2>
