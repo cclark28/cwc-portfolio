@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FAFAFB;
+  --foreground: #18181B;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Prevent body scroll when modals are open */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Skip-to-content link for keyboard/screen-reader users */
+.skip-link { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+.skip-link:focus { position: static; width: auto; height: auto; padding: 8px 16px; background: #18181B; color: #FFFFFF; z-index: 1000; }
+
+/* Card idle float — slow drift like photos on water */
+@keyframes card-float {
+  0% { transform: translate(0px, 0px); }
+  25% { transform: translate(3px, -7px); }
+  50% { transform: translate(-2px, -11px); }
+  75% { transform: translate(-4px, -4px); }
+  100% { transform: translate(0px, 0px); }
+}
+
+/* Card wiggle on hover */
+@keyframes card-wiggle {
+  0% { transform: rotate(0deg) scale(1.045); }
+  15% { transform: rotate(-1.5deg) scale(1.045); }
+  30% { transform: rotate(1.2deg) scale(1.045); }
+  45% { transform: rotate(-0.8deg) scale(1.045); }
+  60% { transform: rotate(0.5deg) scale(1.045); }
+  75% { transform: rotate(-0.2deg) scale(1.045); }
+  100% { transform: rotate(0deg) scale(1.045); }
+}
+
+/* Card fall — drops off screen with spin */
+@keyframes card-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  60% { opacity: 1; }
+  100% { transform: translateY(120vh) rotate(var(--fall-rotate, 25deg)); opacity: 0; }
+}
+
+/* Hero scroll indicator bounce */
+@keyframes hero-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+/* Modal backdrop fade in */
+@keyframes modal-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Modal content slide up + fade in */
+@keyframes modal-content-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Close button hover */
+.close-btn:hover {
+  color: #18181B !important;
+  background: #ECEBEE;
+  border-radius: 50%;
+}
+
+/* Image skeleton pulse */
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+}
