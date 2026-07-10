@@ -202,7 +202,8 @@ interface HomeClientProps {
 
 export default function HomeClient({ work, photo, playground = [], sitePassword, passwordEnabled, commandModule, aboutData }: HomeClientProps) {
   const [screenMode, setScreenMode] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
-  const isMobile = screenMode === 'mobile';
+  const [mounted, setMounted] = useState(false);
+  const isMobile = mounted && screenMode === 'mobile';
   const isTablet = screenMode === 'tablet';
   const canvasRef = useRef<CanvasHandle>(null);
   const [activeFilter, setActiveFilter] = useState<Category | null>(null);
@@ -224,6 +225,7 @@ export default function HomeClient({ work, photo, playground = [], sitePassword,
       else setScreenMode('desktop');
     };
     check();
+    setMounted(true);
     window.addEventListener('resize', check);
     return () => window.removeEventListener('resize', check);
   }, []);
