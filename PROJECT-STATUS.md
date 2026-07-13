@@ -1,6 +1,6 @@
 # CWC Portfolio — Project Status & Documentation
 
-**Last updated:** July 10, 2026
+**Last updated:** July 10, 2026 (evening session)
 **Version:** v1.2.0
 **Live URL:** [charleswclark.com](https://www.charleswclark.com)
 **Repository:** GitHub → Vercel (auto-deploys on push to `main`)
@@ -328,6 +328,8 @@ Cards scale by year — newer projects are bigger and more vivid:
 
 The server always renders the desktop layout. After React hydrates on the client, a `mounted` flag enables the mobile check. This prevents a React hydration crash (error #300) that would occur if the server rendered desktop but the client immediately swapped to MobileLayout.
 
+Additionally, all `useScrambleText` hooks must be called **before** the `if (isMobile) return <MobileLayout />` early exit in HomeClient.tsx. React requires hooks to run in the same order every render — if hooks are called after a conditional return, the hook count changes when `isMobile` flips, and React crashes. The scramble text values are computed but simply unused when the mobile path renders.
+
 ### Responsive Units Used
 
 - `clamp()` for font sizes and spacing
@@ -429,6 +431,7 @@ cd ~/Documents/cwc && ./scripts/backup.sh restore 20260710_081007
 
 | Backup | Description |
 |--------|------------|
+| `20260710_090635` | Post-hooks fix for mobile crash |
 | `20260710_081007` | Post-responsive breakpoints |
 | `20260710_075130` | Mid-responsive work |
 | `20260710_074932_pre-gap-fix` | Before canvas gap-closing logic |
@@ -499,6 +502,7 @@ An emergency backup of the current state is always created before any restore.
 - ProjectDetailModal stacks layout on narrow screens
 - Gallery images wrap instead of forcing side-by-side
 - Hydration crash fix (mounted guard for mobile/desktop swap)
+- **Rules of Hooks fix** — moved `useScrambleText` calls above the `if (isMobile) return` early exit so hook count stays consistent across renders (this was the actual mobile crash)
 - Backup system rewritten: full-project, timestamp-only labels, backwards-compatible restore
 - TypeScript compiles clean throughout
 
@@ -522,7 +526,7 @@ An emergency backup of the current state is always created before any restore.
 
 ### What's Pending Verification
 
-- **Mobile (<480px):** Hydration fix pushed but not yet tested on live site — needs confirmation that MobileLayout loads correctly after the `mounted` guard fix
+- **Mobile (<480px):** Rules of Hooks fix applied (moved `useScrambleText` hooks above conditional return). Needs push + verification on a real phone.
 - **Cross-browser:** Not yet tested on Safari, Firefox, or Edge
 - **Narrow tablet (481–680px):** Terminal 2-column grid not yet visually confirmed
 
@@ -546,9 +550,9 @@ An emergency backup of the current state is always created before any restore.
 
 ### Immediate (before calling it "done")
 
-1. **Push the hydration fix** and verify mobile works on the live site:
+1. **Push the hooks fix** and verify mobile works on the live site:
    ```bash
-   cd ~/Documents/cwc && git add -A && git commit -m "Fix mobile hydration crash: delay MobileLayout swap until after mount" && git push
+   cd ~/Documents/cwc && git add -A && git commit -m "Fix mobile crash: move hooks above conditional return to satisfy Rules of Hooks" && git push
    ```
 
 2. **Test mobile on a real phone** — open charleswclark.com on your phone and verify:
