@@ -1,10 +1,12 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 import type { SizedCanvasItem } from '@/lib/canvasLayout';
 import ProjectDetailModal from '@/components/ProjectDetailModal';
 import InfoModal from '@/components/InfoModal';
 import PasswordGateModal, { isUnlocked, setUnlocked } from '@/components/PasswordGateModal';
+import type { AboutData } from '@/components/HomeClient';
 
 interface MobileLayoutProps {
   work: SizedCanvasItem[];
@@ -12,9 +14,10 @@ interface MobileLayoutProps {
   playground?: SizedCanvasItem[];
   sitePassword?: string;
   passwordEnabled?: boolean;
+  aboutData?: AboutData | null;
 }
 
-export default function MobileLayout({ work, photo, playground = [], sitePassword, passwordEnabled }: MobileLayoutProps) {
+export default function MobileLayout({ work, photo, playground = [], sitePassword, passwordEnabled, aboutData }: MobileLayoutProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<SizedCanvasItem | null>(null);
   const [passwordItem, setPasswordItem] = useState<SizedCanvasItem | null>(null);
@@ -80,13 +83,19 @@ export default function MobileLayout({ work, photo, playground = [], sitePasswor
 
       {/* Content */}
       <div style={{ padding: '24px 16px 80px' }}>
-        <SectionAccordions title="Work" groups={workByYear} onItemClick={handleItemClick} />
+        <div id="section-work">
+          <SectionAccordions title="Work" groups={workByYear} onItemClick={handleItemClick} />
+        </div>
         <div style={{ height: 32 }} />
-        <SectionAccordions title="Photography" groups={photoByYear} onItemClick={handleItemClick} />
+        <div id="section-photo">
+          <SectionAccordions title="Photography" groups={photoByYear} onItemClick={handleItemClick} />
+        </div>
         {playgroundByYear.length > 0 && (
           <>
             <div style={{ height: 32 }} />
-            <SectionAccordions title="Playground" groups={playgroundByYear} onItemClick={handleItemClick} />
+            <div id="section-playground">
+              <SectionAccordions title="Playground" groups={playgroundByYear} onItemClick={handleItemClick} />
+            </div>
           </>
         )}
       </div>
@@ -116,11 +125,37 @@ export default function MobileLayout({ work, photo, playground = [], sitePasswor
           >
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 16 }}>
               <button
+                className="close-btn"
                 onClick={() => setMenuOpen(false)}
-                style={{ background: 'none', border: 'none', cursor: 'pointer', font: "400 1.5rem var(--font-grotesk)", color: '#86858C', lineHeight: 1 }}
+                aria-label="Close"
+                style={{
+                  height: 28,
+                  background: '#ECEBEE',
+                  border: 'none',
+                  borderRadius: 4,
+                  cursor: 'pointer',
+                  padding: '0 10px 0 8px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 4,
+                  color: '#58565D',
+                }}
               >
-                &times;
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                  <path d="M18 6 6 18M6 6l12 12" />
+                </svg>
+                <span style={{ font: "500 0.5625rem var(--font-mono)", textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                  Close
+                </span>
               </button>
+            </div>
+            {/* Category filters */}
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12 }}>
+              <CategoryPill label="Work" onClick={() => { setMenuOpen(false); setTimeout(() => document.getElementById('section-work')?.scrollIntoView({ behavior: 'smooth' }), 150); }} />
+              <CategoryPill label="Photography" onClick={() => { setMenuOpen(false); setTimeout(() => document.getElementById('section-photo')?.scrollIntoView({ behavior: 'smooth' }), 150); }} />
+              {playground.length > 0 && (
+                <CategoryPill label="Playground" onClick={() => { setMenuOpen(false); setTimeout(() => document.getElementById('section-playground')?.scrollIntoView({ behavior: 'smooth' }), 150); }} />
+              )}
             </div>
             <DrawerLink label="Info" onClick={() => { setMenuOpen(false); setShowInfo(true); }} />
             <DrawerLink label="Contact" onClick={() => { setMenuOpen(false); setShowInfo(true); }} />
@@ -137,7 +172,7 @@ export default function MobileLayout({ work, photo, playground = [], sitePasswor
       )}
 
       {/* Modals */}
-      {showInfo && <InfoModal onClose={() => setShowInfo(false)} />}
+      {showInfo && <InfoModal onClose={() => setShowInfo(false)} aboutData={aboutData} />}
       {selectedItem && <ProjectDetailModal item={selectedItem} onClose={() => setSelectedItem(null)} />}
       {passwordItem && (
         <PasswordGateModal
@@ -244,8 +279,15 @@ function YearAccordion({
               {/* Thumbnail */}
               <div style={{ width: 48, height: 36, borderRadius: 3, overflow: 'hidden', flexShrink: 0, background: '#ECEBEE' }}>
                 {item.coverImageUrl && (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={item.coverImageUrl} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                  <Image
+                    src={item.coverImageUrl}
+                    alt=""
+                    width={48}
+                    height={36}
+                    loading="lazy"
+                    placeholder="empty"
+                    style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                  />
                 )}
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
@@ -264,6 +306,27 @@ function YearAccordion({
         </div>
       )}
     </div>
+  );
+}
+
+function CategoryPill({ label, onClick }: { label: string; onClick: () => void }) {
+  return (
+    <button
+      onClick={onClick}
+      style={{
+        background: '#ECEBEE',
+        border: 'none',
+        cursor: 'pointer',
+        font: "500 0.6875rem var(--font-mono)",
+        color: '#18181B',
+        padding: '6px 14px',
+        borderRadius: 9999,
+        textTransform: 'uppercase',
+        letterSpacing: '0.04em',
+      }}
+    >
+      {label}
+    </button>
   );
 }
 

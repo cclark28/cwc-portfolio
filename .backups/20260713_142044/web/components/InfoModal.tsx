@@ -35,6 +35,7 @@ export default function InfoModal({ onClose, aboutData }: InfoModalProps) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        animation: 'modal-backdrop-in 0.25s ease forwards',
       }}
     >
       <div
@@ -46,6 +47,7 @@ export default function InfoModal({ onClose, aboutData }: InfoModalProps) {
           background: '#FFFFFF',
           borderRadius: 6,
           position: 'relative',
+          animation: 'modal-content-in 0.3s ease forwards',
         }}
       >
         {/* Sticky header */}
@@ -68,17 +70,29 @@ export default function InfoModal({ onClose, aboutData }: InfoModalProps) {
           </span>
           <button
             onClick={onClose}
+            aria-label="Close"
             style={{
-              background: 'none',
+              height: 28,
+              background: '#ECEBEE',
               border: 'none',
+              borderRadius: 4,
               cursor: 'pointer',
-              font: "400 1.25rem var(--font-grotesk)",
-              color: '#86858C',
-              padding: '0 4px',
-              lineHeight: 1,
+              padding: '0 10px 0 8px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 4,
+              color: '#58565D',
+              transition: 'background 0.12s ease, color 0.12s ease',
             }}
+            onMouseEnter={(e) => { const b = e.currentTarget as HTMLButtonElement; b.style.background = '#D4D3D8'; b.style.color = '#18181B'; }}
+            onMouseLeave={(e) => { const b = e.currentTarget as HTMLButtonElement; b.style.background = '#ECEBEE'; b.style.color = '#58565D'; }}
           >
-            &times;
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+            <span style={{ font: "500 0.5625rem var(--font-mono)", textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              Close
+            </span>
           </button>
         </div>
 

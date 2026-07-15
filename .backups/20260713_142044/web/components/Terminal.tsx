@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import type { Category } from '@/lib/canvasLayout';
 import type { CommandModuleConfig } from '@/components/HomeClient';
+import { useScrambleText } from '@/lib/useScrambleText';
 
 interface TerminalProps {
   activeFilter: Category | null;
@@ -13,7 +14,11 @@ interface TerminalProps {
 export default function Terminal({ activeFilter, onCommand, config }: TerminalProps) {
   const [input, setInput] = useState('');
   const [focused, setFocused] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Scramble key: increment to replay the scramble animation
+  const [scrambleKey, setScrambleKey] = useState(0);
 
   // Build commands list from config (defaults to all visible)
   const showWork = config?.showWork !== false;
@@ -56,6 +61,11 @@ export default function Terminal({ activeFilter, onCommand, config }: TerminalPr
     onCommand(command);
   };
 
+  const handleExpand = useCallback(() => {
+    setCollapsed(false);
+    setScrambleKey((k) => k + 1);
+  }, []);
+
   // Blinking cursor animation
   const [cursorVisible, setCursorVisible] = useState(true);
   useEffect(() => {
@@ -63,6 +73,66 @@ export default function Terminal({ activeFilter, onCommand, config }: TerminalPr
     const id = setInterval(() => setCursorVisible((v) => !v), 530);
     return () => clearInterval(id);
   }, [focused]);
+
+  // Scramble text for static labels (replays on scrambleKey change)
+  const scrambledPlaceholder = useScrambleText(placeholder, 0, scrambleKey);
+  const scrambledLabel = useScrambleText('Available commands:', 200, scrambleKey);
+  const scrambledHint = useScrambleText(hint, 300, scrambleKey);
+
+  // Collapsed pill — open command module
+  if (collapsed) {
+    return (
+      <button
+        onClick={handleExpand}
+        style={{
+          position: 'fixed',
+          bottom: 28,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          height: 40,
+          background: '#FFFFFF',
+          border: '1px solid #E5E4E6',
+          borderRadius: 6,
+          boxShadow: '0 4px 16px rgba(24,24,27,0.08)',
+          zIndex: 100,
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 0,
+          padding: 0,
+          transition: 'box-shadow 0.15s ease',
+        }}
+        onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 8px 24px rgba(24,24,27,0.14)'; }}
+        onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 16px rgba(24,24,27,0.08)'; }}
+      >
+        {/* Icon container */}
+        <span style={{
+          width: 38,
+          height: 38,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRight: '1px solid #E5E4E6',
+          color: '#58565D',
+          flexShrink: 0,
+        }}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M7.41 15.41 12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+          </svg>
+        </span>
+        {/* Label */}
+        <span style={{
+          font: "500 0.6875rem var(--font-mono)",
+          color: '#18181B',
+          padding: '0 16px',
+          letterSpacing: '0.02em',
+          textTransform: 'uppercase',
+        }}>
+          Open commands
+        </span>
+      </button>
+    );
+  }
 
   return (
     <div
@@ -79,8 +149,40 @@ export default function Terminal({ activeFilter, onCommand, config }: TerminalPr
         zIndex: 100,
         padding: '16px 20px 18px',
         fontFamily: 'var(--font-mono)',
+        transition: 'opacity 0.2s ease',
       }}
     >
+      {/* Collapse toggle — boxed button, top-right */}
+      <button
+        onClick={() => setCollapsed(true)}
+        aria-label="Collapse terminal"
+        style={{
+          position: 'absolute',
+          top: 10,
+          right: 10,
+          height: 28,
+          background: '#ECEBEE',
+          border: 'none',
+          borderRadius: 4,
+          cursor: 'pointer',
+          padding: '0 10px 0 8px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 4,
+          color: '#58565D',
+          transition: 'background 0.12s ease, color 0.12s ease',
+        }}
+        onMouseEnter={(e) => { const b = e.currentTarget as HTMLButtonElement; b.style.background = '#D4D3D8'; b.style.color = '#18181B'; }}
+        onMouseLeave={(e) => { const b = e.currentTarget as HTMLButtonElement; b.style.background = '#ECEBEE'; b.style.color = '#58565D'; }}
+      >
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z" />
+        </svg>
+        <span style={{ font: "500 0.5625rem var(--font-mono)", textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+          Close
+        </span>
+      </button>
+
       {/* Input row */}
       <form onSubmit={handleSubmit} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
         <span style={{ color: '#86858C', fontSize: '0.875rem', flexShrink: 0 }}>&#9654;</span>
@@ -101,7 +203,7 @@ export default function Terminal({ activeFilter, onCommand, config }: TerminalPr
           onChange={(e) => setInput(e.target.value)}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
-          placeholder={placeholder}
+          placeholder={scrambledPlaceholder}
           style={{
             flex: 1,
             background: 'transparent',
@@ -120,29 +222,29 @@ export default function Terminal({ activeFilter, onCommand, config }: TerminalPr
       {/* Labels row */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
         <span style={{ font: "500 0.625rem var(--font-mono)", textTransform: 'uppercase', color: '#9B9AA0', letterSpacing: '0.06em' }}>
-          Available commands:
+          {scrambledLabel}
         </span>
         <span style={{ font: "400 0.625rem var(--font-mono)", color: '#9B9AA0' }}>
-          {hint}
+          {scrambledHint}
         </span>
       </div>
 
       {/* Command grid — 3 columns */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
+      <div className="terminal-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-          {col0.map((c) => (
-            <Chip key={c.command} label={c.label} active={activeFilter === c.command} onClick={() => handleChipClick(c.command)} />
+          {col0.map((c, i) => (
+            <Chip key={c.command} label={c.label} active={activeFilter === c.command} onClick={() => handleChipClick(c.command)} scrambleDelay={400 + i * 80} scrambleKey={scrambleKey} />
           ))}
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-          {col1.map((c) => (
-            <Chip key={c.command} label={c.label} active={activeFilter === c.command} onClick={() => handleChipClick(c.command)} />
+          {col1.map((c, i) => (
+            <Chip key={c.command} label={c.label} active={activeFilter === c.command} onClick={() => handleChipClick(c.command)} scrambleDelay={400 + (col0.length + i) * 80} scrambleKey={scrambleKey} />
           ))}
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-          {col2.map((c) => (
+          {col2.map((c, i) => (
             <div key={c.command} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <Chip label={c.label} onClick={() => handleChipClick(c.command)} />
+              <Chip label={c.label} onClick={() => handleChipClick(c.command)} scrambleDelay={400 + (col0.length + col1.length + i) * 80} scrambleKey={scrambleKey} />
               {c.suffix && (
                 <span style={{ font: "400 0.6875rem var(--font-mono)", color: '#9B9AA0', whiteSpace: 'nowrap' }}>
                   {c.suffix}
@@ -160,12 +262,17 @@ function Chip({
   label,
   active,
   onClick,
+  scrambleDelay = 0,
+  scrambleKey = 0,
 }: {
   label: string;
   active?: boolean;
   onClick: () => void;
+  scrambleDelay?: number;
+  scrambleKey?: number;
 }) {
   const [hovered, setHovered] = useState(false);
+  const scrambledLabel = useScrambleText(label, scrambleDelay, scrambleKey);
 
   return (
     <button
@@ -188,7 +295,7 @@ function Chip({
         textAlign: 'left',
       }}
     >
-      {label}
+      {scrambledLabel}
     </button>
   );
 }
