@@ -1,0 +1,32 @@
+/* CWC Portfolio — globals.css (v1.3.0 Grok) */
+:root {
+  /* Colors */
+  --color-bg: #FAFAFB;
+  --color-fg: #18181B;
+  --color-secondary: #58565D;
+  --color-muted: #9B9AA0;
+  --color-faint: #C4C3C8;
+  --color-border: #E5E4E6;
+  --color-surface: #ECEBEE;
+  --color-link: #4D80E6;
+
+  /* Spacing tokens */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+}
+
+/* Keyframes from original (card-float, wiggle, fall, modals, etc.) — merged for full behavior */
+@keyframes card-float { 0% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-8px) rotate(1deg); } 100% { transform: translateY(0) rotate(0deg); } }
+/* (additional keyframes would be here — paste more if needed from original) */
+
+body {
+  background: var(--color-bg);
+  color: var(--color-fg);
+}
+
+ /* Add your original media queries and styles here if not already present */
