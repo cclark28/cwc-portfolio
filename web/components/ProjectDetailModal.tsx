@@ -169,11 +169,11 @@ export default function ProjectDetailModal({ item, onClose }: ProjectDetailModal
             </div>
           </div>
 
-              {/* Gallery — Bento style with padding + stroke containers */}
+              {/* Gallery — Bento style with thin divider strokes */}
 {allImages.length > 0 && (
   <div style={{
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
     gap: '40px',
     padding: '20px 0',
   }}>
@@ -182,7 +182,7 @@ export default function ProjectDetailModal({ item, onClose }: ProjectDetailModal
         key={index}
         style={{
           padding: '20px',
-          border: '1px solid #9CA3AF',
+          border: '1px solid #E5E4E6', // thinner light divider stroke
           background: '#FAFAFB',
           borderRadius: '4px',
           overflow: 'hidden',
@@ -199,14 +199,15 @@ export default function ProjectDetailModal({ item, onClose }: ProjectDetailModal
           style={{ 
             width: '100%', 
             height: 'auto', 
-            display: 'block' 
+            display: 'block',
+            maxHeight: '600px', // prevent overly tall images
+            objectFit: 'contain' // prevent distortion
           }}
         />
       </div>
     ))}
   </div>
 )}
-
         </div>
       </div>
     </div>
