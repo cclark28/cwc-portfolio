@@ -419,6 +419,7 @@ cd ~/Documents/cwc && ./scripts/backup.sh list
 
 # Restore a specific backup (creates emergency backup first)
 cd ~/Documents/cwc && ./scripts/backup.sh restore 20260710_081007
+| `20260715_083402` | Post-v1.3.0 Grok handoff & scope wrangler verification |
 ```
 
 ### What Gets Backed Up
@@ -433,6 +434,7 @@ cd ~/Documents/cwc && ./scripts/backup.sh restore 20260710_081007
 |--------|------------|
 | `20260710_090635` | Post-hooks fix for mobile crash |
 | `20260710_081007` | Post-responsive breakpoints |
+| `20260715_083402` | Post-v1.3.0 Grok handoff & scope wrangler verification |
 | `20260710_075130` | Mid-responsive work |
 | `20260710_074932_pre-gap-fix` | Before canvas gap-closing logic |
 | `20260709_193117_post-july9-edits` | After July 9 session |
@@ -635,3 +637,5 @@ These commands work in the terminal module at the bottom of the canvas:
 ---
 
 *This document lives at `~/Documents/cwc/PROJECT-STATUS.md` and should be updated as the project evolves.*
+
+| `20260715_083402` | Post-v1.3.0 Grok handoff & scope wrangler verification |

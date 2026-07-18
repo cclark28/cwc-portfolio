@@ -1,0 +1,137 @@
+export default {
+  name: 'about',
+  title: 'About',
+  type: 'document',
+  fields: [
+    {
+      name: 'headline',
+      title: 'Headline',
+      type: 'string',
+      description: 'The big greeting text, e.g. "Aloha, I\'m Charlie."',
+    },
+    {
+      name: 'bio',
+      title: 'Bio',
+      type: 'text',
+      rows: 4,
+      description: 'Short bio paragraph shown on the left side of the info panel.',
+    },
+    {
+      name: 'currentRole',
+      title: 'Current Role',
+      type: 'string',
+      description: 'e.g. "Senior Designer — DemandScience / Terminus"',
+    },
+    {
+      name: 'location',
+      title: 'Location',
+      type: 'string',
+      description: 'e.g. "Based in the United States"',
+    },
+    {
+      name: 'contactEmail',
+      title: 'Contact Email',
+      type: 'string',
+      description: 'Email address for the "Say hello" link.',
+    },
+    {
+      name: 'currentCity',
+      title: 'Current City',
+      type: 'string',
+      description: 'City name shown on the clock, e.g. "Indianapolis" or "Budapest". Update when you travel.',
+    },
+    {
+      name: 'currentCountry',
+      title: 'Current Country',
+      type: 'string',
+      description: 'Country code or name, e.g. "USA" or "Hungary".',
+    },
+    {
+      name: 'timezone',
+      title: 'Timezone',
+      type: 'string',
+      description: 'IANA timezone string, e.g. "America/Indiana/Indianapolis" or "Europe/Budapest". Used for the live clock.',
+    },
+    {
+      name: 'latitude',
+      title: 'Latitude',
+      type: 'string',
+      description: 'e.g. "39.7684° N"',
+    },
+    {
+      name: 'longitude',
+      title: 'Longitude',
+      type: 'string',
+      description: 'e.g. "86.1581° W"',
+    },
+    // ── Hero / Landing Page ──
+    {
+      name: 'heroInitials',
+      title: 'Hero Initials',
+      type: 'string',
+      description: 'Big bold initials on the landing page, e.g. "CWC".',
+    },
+    {
+      name: 'heroName',
+      title: 'Hero Full Name',
+      type: 'string',
+      description: 'Full name displayed large next to initials, e.g. "Charles W. Clark".',
+    },
+    {
+      name: 'heroRoles',
+      title: 'Hero Roles',
+      type: 'array',
+      of: [{ type: 'string' }],
+      description: 'Stacked role lines on the landing page, e.g. "Designer", "Art Director", "Curious & Experimental". Each item shows on its own line.',
+    },
+    {
+      name: 'heroBio',
+      title: 'Hero Bio',
+      type: 'text',
+      rows: 3,
+      description: 'Short bio shown at the bottom of the landing page in small text.',
+    },
+    {
+      name: 'heroTagline',
+      title: 'Hero Tagline',
+      type: 'string',
+      description: 'Second line below the bio, e.g. "Integrating design and AI to help brands communicate, connect, and create."',
+    },
+    {
+      name: 'heroAvailability',
+      title: 'Hero Availability',
+      type: 'string',
+      description: 'Availability message on the landing page, e.g. "Available for work & talks".',
+    },
+    {
+      name: 'description',
+      title: 'Extended Description',
+      type: 'array',
+      of: [{ type: 'block' }],
+      description: 'Optional longer description (not currently shown in the info panel, reserved for future use).',
+    },
+    {
+      name: 'coverImage',
+      title: 'Cover Image',
+      type: 'image',
+      options: { hotspot: true },
+    },
+    {
+      name: 'gallery',
+      title: 'Gallery',
+      type: 'array',
+      of: [
+        { type: 'image', name: 'galleryImage', title: 'Image', options: { hotspot: true } },
+        {
+          type: 'object',
+          name: 'galleryVideo',
+          title: 'Video',
+          fields: [
+            { name: 'file', title: 'Video File', type: 'file', options: { accept: 'video/*' }, validation: Rule => Rule.required() },
+            { name: 'aspectRatio', title: 'Aspect Ratio', type: 'string', options: { list: ['16:9', '9:16'] }, validation: Rule => Rule.required() },
+          ],
+        },
+      ],
+    },
+  ],
+}

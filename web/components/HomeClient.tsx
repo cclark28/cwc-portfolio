@@ -217,13 +217,14 @@ export default function HomeClient({ work, photo, playground = [], sitePassword,
   const [canvasReady, setCanvasReady] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  // Hero content — from Sanity with fallbacks (hooks must be called unconditionally)
-  const heroRolesData = aboutData?.heroRoles ?? ['Artist', 'Designer', 'Curious & Experimental'];
-  const heroNameText = aboutData?.heroName ?? 'charlie';
-  const heroBioText = aboutData?.heroBio ?? 'Design, technology, and AI — building brands that connect.';
-  const heroTaglineText = aboutData?.heroTagline ?? 'Open to collaboration across digital, environmental, and physical touchpoints.';
-  const heroLocationText = 'Worldwide';
-  const heroAvailText = aboutData?.heroAvailability ?? 'Available for work & talks';
+    // Hero content — fully from Sanity, blank when empty
+  const heroRolesData = aboutData?.heroRoles ?? [];
+  const heroNameText = aboutData?.heroName ?? '';
+  const heroBioText = aboutData?.heroBio ?? '';
+  const heroTaglineText = aboutData?.heroTagline ?? '';
+  const heroLocationText = aboutData?.heroLocation ?? '';
+  const heroAvailText = aboutData?.heroAvailability ?? '';
+
 
   // Hero scramble text — staggered for cascading decode
   const heroName = useScrambleText(heroNameText, 200, 0);
@@ -362,7 +363,7 @@ export default function HomeClient({ work, photo, playground = [], sitePassword,
       ref={scrollRef}
       style={{ width: '100vw', height: '100vh', overflowY: 'auto', overflowX: 'hidden', background: '#FAFAFB' }}
     >
-      {/* ===== HERO / LANDING — Mont Blanc typographic style ===== */}
+           {/* ===== HERO / LANDING — Mont Blanc typographic style ===== */}
       <section
         style={{
           width: '100%',
@@ -397,7 +398,7 @@ export default function HomeClient({ work, photo, playground = [], sitePassword,
                 style={{
                   font: "700 clamp(1.5rem, 4vw, 2.75rem)/1.1 var(--font-grotesk)",
                   color: '#1A1A1A',
-                  textTransform: 'uppercase',
+                  textTransform: 'none',
                   letterSpacing: '-0.02em',
                 }}
               >
@@ -406,61 +407,73 @@ export default function HomeClient({ work, photo, playground = [], sitePassword,
             ))}
           </div>
 
-          {/* Location + availability — lighter weight */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginBottom: 32 }}>
-            <div
-              style={{
-                font: "500 clamp(0.875rem, 2vw, 1.25rem)/1.2 var(--font-grotesk)",
-                color: '#86858C',
-                textTransform: 'uppercase',
-                letterSpacing: '0.02em',
-              }}
-            >
-              {heroLocation}
+          {/* Location + availability — only if filled */}
+          {(heroLocationText || heroAvailText) && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginBottom: 32 }}>
+              {heroLocationText && (
+                <div
+                  style={{
+                    font: "500 clamp(0.875rem, 2vw, 1.25rem)/1.2 var(--font-grotesk)",
+                    color: '#86858C',
+                    textTransform: 'none',
+                    letterSpacing: '0.02em',
+                  }}
+                >
+                  {heroLocation}
+                </div>
+              )}
+              {heroAvailText && (
+                <div
+                  style={{
+                    font: "500 clamp(0.875rem, 2vw, 1.25rem)/1.2 var(--font-grotesk)",
+                    color: '#86858C',
+                    textTransform: 'none',
+                    letterSpacing: '0.02em',
+                  }}
+                >
+                  {heroAvail}
+                </div>
+              )}
             </div>
-            <div
-              style={{
-                font: "500 clamp(0.875rem, 2vw, 1.25rem)/1.2 var(--font-grotesk)",
-                color: '#86858C',
-                textTransform: 'uppercase',
-                letterSpacing: '0.02em',
-              }}
-            >
-              {heroAvail}
-            </div>
-          </div>
+          )}
 
           {/* Divider */}
           <div style={{ borderBottom: '1px solid #E5E4E6', width: '100%', marginBottom: 20 }} />
 
-          {/* Bio + tagline — short, punchy */}
-          <div style={{ maxWidth: 600 }}>
-            <p
-              style={{
-                font: `400 ${isTablet ? '0.8125rem' : '0.6875rem'}/1.7 var(--font-mono)`,
-                color: '#58565D',
-                margin: '0 0 8px',
-                letterSpacing: '0.02em',
-                textTransform: 'uppercase',
-              }}
-            >
-              {heroBio}
-            </p>
-            <p
-              style={{
-                font: `400 ${isTablet ? '0.8125rem' : '0.6875rem'}/1.7 var(--font-mono)`,
-                color: '#9B9AA0',
-                margin: 0,
-                letterSpacing: '0.02em',
-                textTransform: 'uppercase',
-              }}
-            >
-              {heroAI}
-            </p>
-          </div>
+          {/* Bio + tagline — only if filled */}
+          {(heroBioText || heroTaglineText) && (
+            <div style={{ maxWidth: 600 }}>
+              {heroBioText && (
+                <p
+                  style={{
+                    font: `400 ${isTablet ? '0.8125rem' : '0.6875rem'}/1.7 var(--font-mono)`,
+                    color: '#58565D',
+                    margin: '0 0 8px',
+                    letterSpacing: '0.02em',
+                    textTransform: 'none',
+                  }}
+                >
+                  {heroBio}
+                </p>
+              )}
+              {heroTaglineText && (
+                <p
+                  style={{
+                    font: `400 ${isTablet ? '0.8125rem' : '0.6875rem'}/1.7 var(--font-mono)`,
+                    color: '#9B9AA0',
+                    margin: 0,
+                    letterSpacing: '0.02em',
+                    textTransform: 'none',
+                  }}
+                >
+                  {heroAI}
+                </p>
+              )}
+            </div>
+          )}
         </div>
 
-        {/* View Work — large, bottom center */}
+        {/* View Work */}
         <button
           onClick={scrollToCanvas}
           aria-label="Scroll to work"
@@ -486,11 +499,12 @@ export default function HomeClient({ work, photo, playground = [], sitePassword,
           <span
             style={{
               font: "600 clamp(0.75rem, 1.5vw, 1rem) var(--font-grotesk)",
-              letterSpacing: '0.12em',
-              textTransform: 'uppercase',
+              letterSpacing: '0.02em',
+              textTransform: 'none',
+              color: '#1A1A1A',
             }}
           >
-            View Work
+            {commandModule?.viewWorkLabel || 'View work'}
           </span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 5v14M19 12l-7 7-7-7" />
@@ -561,7 +575,7 @@ export default function HomeClient({ work, photo, playground = [], sitePassword,
           transition: 'opacity 0.4s ease',
         }}
       >
-        v1.3.0
+        v1.2.0
       </div>
 
       {/* Location clock — only visible past hero */}
