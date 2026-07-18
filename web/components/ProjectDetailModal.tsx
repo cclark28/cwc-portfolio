@@ -169,47 +169,44 @@ export default function ProjectDetailModal({ item, onClose }: ProjectDetailModal
             </div>
           </div>
 
-          {/* Gallery — images with container dividers, not image borders */}
-          {allImages.length > 0 && (
-            <div>
-              {/* Pair images side by side when there are multiple, with divider lines between containers */}
-              {(() => {
-                const rows: string[][] = [];
-                for (let i = 0; i < allImages.length; i += 2) {
-                  if (i + 1 < allImages.length) {
-                    rows.push([allImages[i], allImages[i + 1]]);
-                  } else {
-                    rows.push([allImages[i]]);
-                  }
-                }
-                return rows.map((row, ri) => (
-                  <div key={ri}>
-                    {ri > 0 && <div style={{ borderTop: '1px solid #E5E4E6', margin: '20px 0' }} />}
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20 }}>
-                      {row.map((url, ci) => (
-                        <div key={ci} style={{ flex: '1 1 clamp(200px, 40vw, 560px)', position: 'relative' }}>
-                          {/* Vertical divider between side-by-side images */}
-                          {ci > 0 && (
-                            <div style={{ position: 'absolute', left: -10, top: 0, bottom: 0, width: 1, background: '#E5E4E6' }} />
-                          )}
-                          <Image
-                            src={url}
-                            alt=""
-                            width={1200}
-                            height={800}
-                            sizes={row.length > 1 ? '(max-width: 1200px) 47vw, 560px' : '(max-width: 1200px) 94vw, 1120px'}
-                            loading="lazy"
-                            placeholder="empty"
-                            style={{ width: '100%', height: 'auto', display: 'block' }}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ));
-              })()}
-            </div>
-          )}
+              {/* Gallery — Bento style with padding + stroke containers */}
+{allImages.length > 0 && (
+  <div style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+    gap: '40px',
+    padding: '20px 0',
+  }}>
+    {allImages.map((url, index) => (
+      <div 
+        key={index}
+        style={{
+          padding: '20px',
+          border: '1px solid #9CA3AF',
+          background: '#FAFAFB',
+          borderRadius: '4px',
+          overflow: 'hidden',
+        }}
+      >
+        <Image
+          src={url}
+          alt=""
+          width={1200}
+          height={800}
+          sizes="(max-width: 1200px) 100vw, 560px"
+          loading="lazy"
+          placeholder="empty"
+          style={{ 
+            width: '100%', 
+            height: 'auto', 
+            display: 'block' 
+          }}
+        />
+      </div>
+    ))}
+  </div>
+)}
+
         </div>
       </div>
     </div>
