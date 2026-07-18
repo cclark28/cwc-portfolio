@@ -169,13 +169,14 @@ export default function ProjectDetailModal({ item, onClose }: ProjectDetailModal
             </div>
           </div>
 
-{/* Gallery — Bento style: clean contained images */}
+{/* Gallery — Flexible Bento with independent blocks */}
 {allImages.length > 0 && (
   <div style={{
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
     gap: '40px',
     padding: '20px 0',
+    alignItems: 'start',
   }}>
     {allImages.map((url, index) => (
       <div 
@@ -186,10 +187,6 @@ export default function ProjectDetailModal({ item, onClose }: ProjectDetailModal
           background: '#FAFAFB',
           borderRadius: '4px',
           overflow: 'hidden',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: '320px',
         }}
       >
         <Image
@@ -203,9 +200,9 @@ export default function ProjectDetailModal({ item, onClose }: ProjectDetailModal
           style={{ 
             width: '100%', 
             height: 'auto', 
+            display: 'block',
             maxHeight: '520px',
-            objectFit: 'contain',
-            display: 'block' 
+            objectFit: 'contain'
           }}
         />
       </div>
