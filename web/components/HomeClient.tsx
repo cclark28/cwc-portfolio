@@ -217,13 +217,13 @@ export default function HomeClient({ work, photo, playground = [], sitePassword,
   const [canvasReady, setCanvasReady] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-    // Hero content — fully from Sanity, blank when empty
-  const heroRolesData = aboutData?.heroRoles ?? [];
-  const heroNameText = aboutData?.heroName ?? '';
-  const heroBioText = aboutData?.heroBio ?? '';
-  const heroTaglineText = aboutData?.heroTagline ?? '';
-  const heroLocationText = aboutData?.heroLocation ?? '';
-  const heroAvailText = aboutData?.heroAvailability ?? '';
+// Hero content — fully from Sanity, blank when empty
+const heroRolesData = aboutData?.heroRoles ?? [];
+const heroNameText = aboutData?.heroName ?? '';
+const heroBioText = aboutData?.heroBio ?? '';
+const heroTaglineText = aboutData?.heroTagline ?? '';
+const heroLocationText = aboutData?.location ?? '';        // ✅ Fixed: 'location' per AboutData type
+const heroAvailText = aboutData?.heroAvailability ?? '';
 
 
   // Hero scramble text — staggered for cascading decode
@@ -504,7 +504,7 @@ export default function HomeClient({ work, photo, playground = [], sitePassword,
               color: '#1A1A1A',
             }}
           >
-            {commandModule?.viewWorkLabel || 'View work'}
+            {commandModule?.workLabel || 'View work'}  // ✅ Fixed: matches CommandModuleConfig
           </span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 5v14M19 12l-7 7-7-7" />
